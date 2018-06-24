@@ -7,3 +7,6 @@ on:
 
 jobs:
   go:
+    name: Go analyzer
+    runs-on: ubuntu-latest
+    steps:
