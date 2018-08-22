@@ -2,3 +2,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="contractfault impact seismograph for orders-api">
   <rect width="720" height="360" fill="#0d1117" />
   <text x="20" y="48" font-size="22" font-family="monospace" fill="#c9d1d9">orders-api 1.4.0 → 2.0.0</text>
+  <text x="20" y="78" font-size="16" font-family="monospace" fill="#e5484d">magnitude 8.5 · RUPTURE</text>
+  <line x1="20" y1="210" x2="700" y2="210" stroke="#30363d" stroke-width="1" stroke-dasharray="6 5" />
