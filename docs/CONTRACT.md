@@ -37,3 +37,23 @@ ignored.
 
 ```json
 "Order": {
+  "kind": "object",
+  "fields": {
+    "id":     { "type": "string", "required": true },
+    "status": { "type": "OrderStatus", "required": true }
+  }
+}
+```
+
+| Field        | Type                | Meaning                                                        |
+|--------------|---------------------|----------------------------------------------------------------|
+| `kind`       | string              | `object`, `string`, `integer`, `number`, or `boolean`.         |
+| `fields`     | object of `Field`   | Members of an `object` type.                                   |
+| `enum`       | array of string     | Permitted values for a scalar type (empty = unconstrained).    |
+| `deprecated` | boolean             | Marks the whole type as scheduled for removal.                 |
+
+### 1.2 Field
+
+| Field        | Type    | Meaning                                                                    |
+|--------------|---------|----------------------------------------------------------------------------|
+| `type`       | string  | Builtin scalar or the name of another `Type`.                              |
