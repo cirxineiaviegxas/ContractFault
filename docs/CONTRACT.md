@@ -57,3 +57,23 @@ ignored.
 | Field        | Type    | Meaning                                                                    |
 |--------------|---------|----------------------------------------------------------------------------|
 | `type`       | string  | Builtin scalar or the name of another `Type`.                              |
+| `required`   | boolean | Field must always be present.                                              |
+| `nullable`   | boolean | Field may carry an explicit `null`.                                        |
+| `array`      | boolean | Field is a homogeneous list of `type`.                                     |
+| `deprecated` | boolean | Field scheduled for removal.                                               |
+| `doc`        | string  | Short description, surfaced verbatim in migration hints.                   |
+
+### 1.3 Endpoint
+
+```json
+{
+  "id": "getOrder",
+  "method": "GET",
+  "path": "/orders/{id}",
+  "idempotent": true,
+  "params": [ { "name": "id", "in": "path", "type": "string", "required": true } ],
+  "responses": { "200": "Order", "404": "Error" }
+}
+```
+
+| Field         | Type              | Meaning                                                                 |
