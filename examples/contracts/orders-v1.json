@@ -1,0 +1,6 @@
+{
+  "service": "orders-api",
+  "version": "1.4.0",
+  "types": {
+    "Money": {
+      "kind": "object",
