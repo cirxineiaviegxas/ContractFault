@@ -4,3 +4,9 @@
   "types": {
     "Money": {
       "kind": "object",
+      "fields": {
+        "amount": { "type": "integer", "required": true, "doc": "minor units" },
+        "currency": { "type": "string", "required": true }
+      }
+    },
+    "OrderStatus": {
