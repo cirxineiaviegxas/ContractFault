@@ -1,0 +1,22 @@
+{
+  "schema": "contractfault/v1",
+  "service": "orders-api",
+  "fromVersion": "1.4.0",
+  "toVersion": "2.0.0",
+  "summary": {
+    "breaking": 8,
+    "additive": 5,
+    "behavioral": 2,
+    "affectedConsumers": 4,
+    "magnitude": 8.5,
+    "verdict": "rupture"
+  },
+  "changes": [
+    {
+      "code": "endpoint.method.changed",
+      "category": "breaking",
+      "severity": "critical",
+      "location": "cancelOrder",
+      "endpoint": "cancelOrder",
+      "detail": "method changed POST -> DELETE",
+      "migration": "Update the HTTP verb from POST to DELETE.",
