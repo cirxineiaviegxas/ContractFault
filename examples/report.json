@@ -20,3 +20,25 @@
       "endpoint": "cancelOrder",
       "detail": "method changed POST -> DELETE",
       "migration": "Update the HTTP verb from POST to DELETE.",
+      "consumers": [
+        "checkout-web"
+      ]
+    },
+    {
+      "code": "endpoint.removed",
+      "category": "breaking",
+      "severity": "critical",
+      "location": "getReceipt",
+      "endpoint": "getReceipt",
+      "detail": "endpoint GET /orders/{id}/receipt (getReceipt) was removed",
+      "migration": "Stop calling this endpoint; migrate to a replacement operation before upgrading.",
+      "consumers": [
+        "analytics-etl",
+        "receipts-mailer"
+      ]
+    },
+    {
+      "code": "endpoint.idempotency.changed",
+      "category": "behavioral",
+      "severity": "major",
+      "location": "cancelOrder",
