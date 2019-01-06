@@ -42,3 +42,26 @@
       "category": "behavioral",
       "severity": "major",
       "location": "cancelOrder",
+      "endpoint": "cancelOrder",
+      "detail": "idempotency changed true -> false",
+      "migration": "Review retry logic: repeated calls may no longer be safe.",
+      "consumers": [
+        "checkout-web"
+      ]
+    },
+    {
+      "code": "endpoint.path.changed",
+      "category": "breaking",
+      "severity": "major",
+      "location": "cancelOrder",
+      "endpoint": "cancelOrder",
+      "detail": "path changed /orders/{id}/cancel -> /orders/{id}",
+      "migration": "Update the request URL template to /orders/{id}.",
+      "consumers": [
+        "checkout-web"
+      ]
+    },
+    {
+      "code": "field.added",
+      "category": "breaking",
+      "severity": "major",
