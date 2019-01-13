@@ -65,3 +65,25 @@
       "code": "field.added",
       "category": "breaking",
       "severity": "major",
+      "location": "CreateOrderRequest.customerId",
+      "fieldPath": "CreateOrderRequest.customerId",
+      "detail": "field CreateOrderRequest.customerId added (required=true)",
+      "migration": "A required field CreateOrderRequest.customerId was added; producers must populate it.",
+      "consumers": []
+    },
+    {
+      "code": "field.added",
+      "category": "breaking",
+      "severity": "major",
+      "location": "Order.customerId",
+      "fieldPath": "Order.customerId",
+      "detail": "field Order.customerId added (required=true)",
+      "migration": "A required field Order.customerId was added; producers must populate it.",
+      "consumers": []
+    },
+    {
+      "code": "field.removed",
+      "category": "breaking",
+      "severity": "major",
+      "location": "Order.couponCode",
+      "fieldPath": "Order.couponCode",
