@@ -8,3 +8,14 @@
 // to compute a precise blast radius without forcing consumers to publish their
 // entire source tree.
 package consumer
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"strings"
+)
+
+// Manifest describes one named consumer's dependence on a contract.
+type Manifest struct {
