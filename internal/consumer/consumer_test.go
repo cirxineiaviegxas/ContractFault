@@ -8,3 +8,6 @@ func TestCriticalityWeight(t *testing.T) {
 		m := Manifest{Criticality: label}
 		if got := m.CriticalityWeight(); got != want {
 			t.Errorf("weight(%q) = %d, want %d", label, got, want)
+		}
+	}
+}
