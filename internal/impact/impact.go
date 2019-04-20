@@ -10,3 +10,16 @@ package impact
 
 import (
 	"sort"
+
+	"github.com/seismic-labs/contractfault/internal/analyze"
+	"github.com/seismic-labs/contractfault/internal/consumer"
+)
+
+// Report is the top-level, serializable output of the analyzer.
+type Report struct {
+	// Schema is a version tag so the TypeScript viewer can guard on shape.
+	Schema string `json:"schema"`
+	// Service is the analyzed service name.
+	Service string `json:"service"`
+	// FromVersion / ToVersion bracket the comparison.
+	FromVersion string `json:"fromVersion"`
