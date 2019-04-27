@@ -23,3 +23,15 @@ type Report struct {
 	Service string `json:"service"`
 	// FromVersion / ToVersion bracket the comparison.
 	FromVersion string `json:"fromVersion"`
+	ToVersion   string `json:"toVersion"`
+	// Summary aggregates counts and the overall magnitude.
+	Summary Summary `json:"summary"`
+	// Changes is the full classified change set, each annotated with the
+	// consumers it impacts.
+	Changes []ChangeImpact `json:"changes"`
+	// Consumers is the per-consumer rollup of impacts.
+	Consumers []ConsumerImpact `json:"consumers"`
+}
+
+// Summary holds aggregate metrics for the whole comparison.
+type Summary struct {
