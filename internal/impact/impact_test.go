@@ -12,3 +12,7 @@ func mkDiff(changes ...analyze.Change) *analyze.Diff {
 }
 
 func TestFieldChangeOnlyHitsReaders(t *testing.T) {
+	d := mkDiff(analyze.Change{
+		Code: "field.removed", Category: analyze.Breaking, Severity: "major",
+		Location: "Order.couponCode", FieldPath: "Order.couponCode",
+	})
