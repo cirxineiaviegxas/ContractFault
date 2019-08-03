@@ -6,3 +6,7 @@
 
 GO        ?= go
 NPM       ?= npm
+BIN       ?= bin/contractfault
+VIEWER    ?= viewer
+EXAMPLES  ?= examples
+OLD       ?= $(EXAMPLES)/contracts/orders-v1.json
