@@ -30,3 +30,19 @@ function severityColor(sev: Severity): string {
       return RED;
     case "major":
       return YELLOW;
+    case "minor":
+      return CYAN;
+    default:
+      return DIM;
+  }
+}
+
+function categoryGlyph(cat: Category): string {
+  switch (cat) {
+    case "breaking":
+      return "!!";
+    case "behavioral":
+      return "~~";
+    default:
+      return "++";
+  }
