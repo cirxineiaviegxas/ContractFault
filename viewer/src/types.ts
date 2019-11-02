@@ -9,3 +9,8 @@ export type Severity = "critical" | "major" | "minor" | "info";
 export type Verdict = "stable" | "tremor" | "shaken" | "rupture";
 
 export interface Summary {
+  breaking: number;
+  additive: number;
+  behavioral: number;
+  affectedConsumers: number;
+  magnitude: number;
