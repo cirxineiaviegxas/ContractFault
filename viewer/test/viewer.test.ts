@@ -10,3 +10,15 @@ function sample(overrides: Partial<Report> = {}): Report {
     service: "orders-api",
     fromVersion: "1.4.0",
     toVersion: "2.0.0",
+    summary: {
+      breaking: 2,
+      additive: 3,
+      behavioral: 1,
+      affectedConsumers: 2,
+      magnitude: 7.2,
+      verdict: "rupture",
+    },
+    changes: [
+      {
+        code: "endpoint.removed",
+        category: "breaking",
