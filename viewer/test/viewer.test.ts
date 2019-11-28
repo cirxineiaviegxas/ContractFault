@@ -22,3 +22,15 @@ function sample(overrides: Partial<Report> = {}): Report {
       {
         code: "endpoint.removed",
         category: "breaking",
+        severity: "critical",
+        location: "getReceipt",
+        endpoint: "getReceipt",
+        detail: "endpoint removed",
+        migration: "stop calling it",
+        consumers: ["analytics-etl", "receipts-mailer"],
+      },
+      {
+        code: "field.added",
+        category: "additive",
+        severity: "info",
+        location: "Error.traceId",
