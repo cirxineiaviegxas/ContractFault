@@ -46,3 +46,27 @@ That sentence is worth more than any diff.
         │  endpoints · types        │  DIFF   │  endpoints · types          │
         └──────────────┬───────────┘   ═══>   └─────────────┬──────────────┘
                        │                                    │
+                       ▼                                    ▼
+                  ╭─────────────────  classify  ─────────────────╮
+                  │  breaking · additive · behavioral            │
+                  ╰───────────────────┬──────────────────────────╯
+                                      │  join
+                       ┌──────────────┼───────────────┐
+                       ▼              ▼               ▼
+                 checkout-web   analytics-etl   receipts-mailer   … named consumers
+```
+
+---
+
+## The laboratory at a glance
+
+```
+contractfault/
+├── cmd/contractfault/        # Go stdlib CLI — the seismograph
+│   └── main.go               #   flag parsing, glob expansion, pipeline, exit codes
+├── internal/
+│   ├── contract/             # the documented JSON contract format + strict loader
+│   ├── consumer/             # consumer usage manifests + criticality weighting
+│   ├── analyze/              # the classification engine (the fault mechanics)
+│   ├── impact/               # change→consumer join, magnitude, verdict
+│   └── report/               # deterministic JSON + text seismograph renderers
