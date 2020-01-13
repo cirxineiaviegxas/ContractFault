@@ -48,3 +48,16 @@ type Summary struct {
 
 // ChangeImpact is a classified change plus the consumers it affects.
 type ChangeImpact struct {
+	analyze.Change
+	// Consumers lists the names of consumers impacted by this change.
+	Consumers []string `json:"consumers"`
+}
+
+// ConsumerImpact is one consumer's rollup across all changes.
+type ConsumerImpact struct {
+	Name        string `json:"name"`
+	Team        string `json:"team"`
+	Criticality string `json:"criticality"`
+	// Breaking / Additive / Behavioral count impacts by category.
+	Breaking   int `json:"breaking"`
+	Additive   int `json:"additive"`
