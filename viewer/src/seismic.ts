@@ -46,3 +46,19 @@ function categoryGlyph(cat: Category): string {
     default:
       return "++";
   }
+}
+
+function paint(s: string, color: string, on: boolean): string {
+  return on ? `${color}${s}${RESET}` : s;
+}
+
+/** magnitudeBar draws a 40-cell Richter-style meter for a 0-10 magnitude. */
+export function magnitudeBar(magnitude: number, width = 40): string {
+  const clamped = Math.max(0, Math.min(10, magnitude));
+  const filled = Math.round((clamped / 10) * width);
+  return "[" + "#".repeat(filled) + "-".repeat(width - filled) + "]";
+}
+
+/** renderTerminal produces the console seismic map. */
+export function renderTerminal(report: Report, opts: RenderOptions = { color: true }): string {
+  const c = opts.color;
