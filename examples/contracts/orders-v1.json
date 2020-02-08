@@ -10,3 +10,9 @@
       }
     },
     "OrderStatus": {
+      "kind": "string",
+      "enum": ["pending", "paid", "shipped", "cancelled", "refunded"]
+    },
+    "LineItem": {
+      "kind": "object",
+      "fields": {
