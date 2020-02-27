@@ -6,3 +6,12 @@
 package report
 
 import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"strings"
+
+	"github.com/seismic-labs/contractfault/internal/analyze"
+	"github.com/seismic-labs/contractfault/internal/impact"
+)
+
