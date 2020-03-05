@@ -75,3 +75,42 @@ type Change struct {
 	// ParamKey is the parameter key this change touches, if any.
 	ParamKey string `json:"paramKey,omitempty"`
 	// Detail is a one-line human description of what changed.
+	Detail string `json:"detail"`
+	// Migration is an actionable hint for consumers.
+	Migration string `json:"migration"`
+}
+
+// severityRank exposes the numeric severity for sorting and scoring.
+func severityRank(s string) int {
+	switch s {
+	case "critical":
+		return 4
+	case "major":
+		return 3
+	case "minor":
+		return 2
+	default:
+		return 1
+	}
+}
+
+// Diff holds the full set of classified changes between two versions.
+type Diff struct {
+	FromVersion string
+	ToVersion   string
+	Service     string
+	Changes     []Change
+}
+
+// Compare classifies every difference between the old and new contract.
+// The two contracts must describe the same service.
+func Compare(oldC, newC *contract.Contract) (*Diff, error) {
+	if oldC.Service != newC.Service {
+		return nil, fmt.Errorf("analyze: service mismatch %q vs %q", oldC.Service, newC.Service)
+	}
+	d := &Diff{
+		FromVersion: oldC.Version,
+		ToVersion:   newC.Version,
+		Service:     newC.Service,
+	}
+	d.diffEndpoints(oldC, newC)
