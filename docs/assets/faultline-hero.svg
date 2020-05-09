@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300" role="img" aria-labelledby="cf-hero-title cf-hero-desc">
   <title id="cf-hero-title">contractfault faultline</title>
+  <desc id="cf-hero-desc">Two crustal plates separated by a glowing fault rift, with a seismograph trace and two epicenter pulses sweeping across it, standing for API contract changes classified as breaking, additive, or behavioral and mapped to each consumer.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117" />
