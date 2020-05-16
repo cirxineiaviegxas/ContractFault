@@ -29,3 +29,13 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
+	"strings"
+
+	"github.com/seismic-labs/contractfault/internal/analyze"
+	"github.com/seismic-labs/contractfault/internal/consumer"
+	"github.com/seismic-labs/contractfault/internal/contract"
+	"github.com/seismic-labs/contractfault/internal/impact"
+	"github.com/seismic-labs/contractfault/internal/report"
+)
+
