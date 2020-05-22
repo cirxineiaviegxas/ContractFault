@@ -16,3 +16,8 @@ func TestFieldChangeOnlyHitsReaders(t *testing.T) {
 		Code: "field.removed", Category: analyze.Breaking, Severity: "major",
 		Location: "Order.couponCode", FieldPath: "Order.couponCode",
 	})
+	consumers := []consumer.Manifest{
+		{Name: "reader", Criticality: "high", Uses: []consumer.Usage{
+			{Endpoint: "getOrder", ReadsFields: []string{"Order.couponCode"}}}},
+		{Name: "nonreader", Criticality: "high", Uses: []consumer.Usage{
+			{Endpoint: "getOrder", ReadsFields: []string{"Order.id"}}}},
