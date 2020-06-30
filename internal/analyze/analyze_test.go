@@ -24,3 +24,17 @@ func find(d *Diff, code string) *Change {
 func TestEndpointRemovedIsBreakingCritical(t *testing.T) {
 	oldC := build("1", nil, contract.Endpoint{ID: "a", Method: "GET", Path: "/a"})
 	newC := build("2", nil)
+	d, err := Compare(oldC, newC)
+	if err != nil {
+		t.Fatal(err)
+	}
+	c := find(d, "endpoint.removed")
+	if c == nil {
+		t.Fatal("missing endpoint.removed")
+	}
+	if c.Category != Breaking || c.Severity != "critical" {
+		t.Errorf("got %s/%s", c.Category, c.Severity)
+	}
+}
+
+func TestEndpointAddedIsAdditive(t *testing.T) {
