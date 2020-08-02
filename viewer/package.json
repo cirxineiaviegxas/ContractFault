@@ -1,3 +1,4 @@
 {
   "name": "@seismic-labs/contractfault-viewer",
   "version": "1.0.0",
+  "description": "Seismic impact map/report viewer for contractfault JSON reports",
