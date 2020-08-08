@@ -39,3 +39,14 @@ import (
 	"github.com/seismic-labs/contractfault/internal/report"
 )
 
+const usageExit = 3
+
+type options struct {
+	oldPath          string
+	newPath          string
+	consumers        string
+	format           string
+	out              string
+	failOnBehavioral bool
+	quiet            bool
+}
