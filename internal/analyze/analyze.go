@@ -114,3 +114,42 @@ func Compare(oldC, newC *contract.Contract) (*Diff, error) {
 		Service:     newC.Service,
 	}
 	d.diffEndpoints(oldC, newC)
+	d.diffTypes(oldC, newC)
+	d.sortChanges()
+	return d, nil
+}
+
+func (d *Diff) add(c Change) { d.Changes = append(d.Changes, c) }
+
+// diffEndpoints classifies endpoint-level differences.
+func (d *Diff) diffEndpoints(oldC, newC *contract.Contract) {
+	oldEps := oldC.EndpointByID()
+	newEps := newC.EndpointByID()
+
+	for id, oe := range oldEps {
+		ne, ok := newEps[id]
+		if !ok {
+			d.add(Change{
+				Code:      "endpoint.removed",
+				Category:  Breaking,
+				Severity:  Critical.String(),
+				Location:  id,
+				Endpoint:  id,
+				Detail:    fmt.Sprintf("endpoint %s %s (%s) was removed", oe.Method, oe.Path, id),
+				Migration: "Stop calling this endpoint; migrate to a replacement operation before upgrading.",
+			})
+			continue
+		}
+		d.diffEndpointPair(oe, ne)
+	}
+	for id, ne := range newEps {
+		if _, ok := oldEps[id]; !ok {
+			d.add(Change{
+				Code:      "endpoint.added",
+				Category:  Additive,
+				Severity:  Info.String(),
+				Location:  id,
+				Endpoint:  id,
+				Detail:    fmt.Sprintf("endpoint %s %s (%s) was added", ne.Method, ne.Path, id),
+				Migration: "No action required; new capability is available to adopt.",
+			})
