@@ -61,3 +61,15 @@ type ConsumerImpact struct {
 	// Breaking / Additive / Behavioral count impacts by category.
 	Breaking   int `json:"breaking"`
 	Additive   int `json:"additive"`
+	Behavioral int `json:"behavioral"`
+	// Codes lists the change codes affecting this consumer, sorted.
+	Codes []string `json:"codes"`
+	// Score is this consumer's weighted contribution to the magnitude.
+	Score float64 `json:"score"`
+}
+
+// severityWeight maps a severity label to a magnitude weight.
+func severityWeight(sev string) float64 {
+	switch sev {
+	case "critical":
+		return 4.0
