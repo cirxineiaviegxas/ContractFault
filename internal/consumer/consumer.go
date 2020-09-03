@@ -19,3 +19,14 @@ import (
 
 // Manifest describes one named consumer's dependence on a contract.
 type Manifest struct {
+	// Name is the consumer's service name ("checkout-web").
+	Name string `json:"name"`
+	// Team is the owning team, surfaced in reports for routing.
+	Team string `json:"team"`
+	// Criticality is one of "low", "medium", "high"; it weights the severity
+	// of impacts in the aggregate risk score.
+	Criticality string `json:"criticality"`
+	// Uses lists the specific contract elements the consumer relies on.
+	Uses []Usage `json:"uses"`
+}
+
