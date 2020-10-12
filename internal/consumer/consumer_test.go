@@ -11,3 +11,6 @@ func TestCriticalityWeight(t *testing.T) {
 		}
 	}
 }
+
+func TestValidateRejectsBadCriticality(t *testing.T) {
+	m := Manifest{Name: "c", Criticality: "extreme"}
