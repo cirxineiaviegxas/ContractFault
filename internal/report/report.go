@@ -15,3 +15,12 @@ import (
 	"github.com/seismic-labs/contractfault/internal/impact"
 )
 
+// JSON renders the report as indented, deterministic JSON with a trailing
+// newline. Map iteration is avoided in the pipeline so ordering is stable.
+func JSON(r *impact.Report) ([]byte, error) {
+	var buf bytes.Buffer
+	enc := json.NewEncoder(&buf)
+	enc.SetIndent("", "  ")
+	enc.SetEscapeHTML(false)
+	if err := enc.Encode(r); err != nil {
+		return nil, fmt.Errorf("report: encoding JSON: %w", err)
