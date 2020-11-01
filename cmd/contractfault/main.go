@@ -60,3 +60,13 @@ func main() {
 func run(args []string, out, errw *os.File) int {
 	opts, err := parseFlags(args, errw)
 	if err != nil {
+		if errors.Is(err, flag.ErrHelp) {
+			return 0
+		}
+		fmt.Fprintf(errw, "contractfault: %v\n", err)
+		return usageExit
+	}
+
+	oldC, err := contract.Load(opts.oldPath)
+	if err != nil {
+		fmt.Fprintf(errw, "contractfault: %v\n", err)
