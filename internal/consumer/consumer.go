@@ -30,3 +30,14 @@ type Manifest struct {
 	Uses []Usage `json:"uses"`
 }
 
+// Usage is a single dependency edge from a consumer to a contract element.
+type Usage struct {
+	// Endpoint is the operation ID the consumer calls.
+	Endpoint string `json:"endpoint"`
+	// ReadsFields lists "Type.field" paths the consumer reads from responses.
+	ReadsFields []string `json:"readsFields,omitempty"`
+	// WritesFields lists "Type.field" paths the consumer sends in requests.
+	WritesFields []string `json:"writesFields,omitempty"`
+	// Params lists request parameter keys ("query:status") the consumer sets.
+	Params []string `json:"params,omitempty"`
+}
