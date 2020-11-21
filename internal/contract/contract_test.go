@@ -14,3 +14,11 @@ const minimal = `{
   "endpoints": [
     { "id": "getWidget", "method": "get", "path": "/w/{id}", "responses": { "200": "Widget" } }
   ]
+}`
+
+func TestParseNormalizesMethodAndTypeName(t *testing.T) {
+	c, err := Parse([]byte(minimal), "test")
+	if err != nil {
+		t.Fatalf("parse: %v", err)
+	}
+	if got := c.Endpoints[0].Method; got != "GET" {
