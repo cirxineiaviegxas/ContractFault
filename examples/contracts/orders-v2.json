@@ -12,3 +12,11 @@
     },
     "OrderStatus": {
       "kind": "string",
+      "enum": ["pending", "authorized", "paid", "shipped", "delivered", "cancelled"]
+    },
+    "LineItem": {
+      "kind": "object",
+      "fields": {
+        "sku": { "type": "string", "required": true },
+        "qty": { "type": "integer", "required": true },
+        "price": { "type": "Money", "required": true },
