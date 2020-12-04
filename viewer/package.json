@@ -4,3 +4,4 @@
   "description": "Seismic impact map/report viewer for contractfault JSON reports",
   "license": "MIT",
   "type": "module",
+  "bin": {
