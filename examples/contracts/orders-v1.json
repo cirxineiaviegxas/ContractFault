@@ -16,3 +16,10 @@
     "LineItem": {
       "kind": "object",
       "fields": {
+        "sku": { "type": "string", "required": true },
+        "qty": { "type": "integer", "required": true },
+        "price": { "type": "Money", "required": true }
+      }
+    },
+    "Order": {
+      "kind": "object",
