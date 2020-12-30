@@ -1,3 +1,4 @@
 {
   "name": "fulfillment-worker",
   "team": "logistics",
+  "criticality": "high",
