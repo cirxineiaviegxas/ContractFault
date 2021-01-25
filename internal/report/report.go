@@ -33,3 +33,12 @@ func Text(r *impact.Report) string {
 	var b strings.Builder
 	fmt.Fprintf(&b, "contractfault seismic report\n")
 	fmt.Fprintf(&b, "service : %s\n", r.Service)
+	fmt.Fprintf(&b, "shift   : %s -> %s\n", r.FromVersion, r.ToVersion)
+	fmt.Fprintf(&b, "magnitude %.1f  verdict %s\n", r.Summary.Magnitude, strings.ToUpper(r.Summary.Verdict))
+	b.WriteString(seismograph(r.Summary.Magnitude))
+	b.WriteString("\n")
+	fmt.Fprintf(&b, "breaking=%d  additive=%d  behavioral=%d  affected-consumers=%d\n\n",
+		r.Summary.Breaking, r.Summary.Additive, r.Summary.Behavioral, r.Summary.AffectedConsumers)
+
+	if len(r.Changes) == 0 {
+		b.WriteString("no changes detected; the fault line is quiet.\n")
