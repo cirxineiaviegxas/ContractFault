@@ -10,3 +10,9 @@
  * 1 when it contains behavioral-only changes, 0 when stable. This lets the
  * viewer double as a CI gate when consuming a stored report.
  */
+
+import { readFileSync, writeFileSync } from "node:fs";
+import { parseReport } from "./types.js";
+import { renderSvg, renderTerminal } from "./seismic.js";
+
+interface Args {
