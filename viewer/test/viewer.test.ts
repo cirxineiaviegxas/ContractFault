@@ -34,3 +34,15 @@ function sample(overrides: Partial<Report> = {}): Report {
         category: "additive",
         severity: "info",
         location: "Error.traceId",
+        fieldPath: "Error.traceId",
+        detail: "field added",
+        migration: "adopt it",
+        consumers: [],
+      },
+    ],
+    consumers: [
+      {
+        name: "analytics-etl",
+        team: "data",
+        criticality: "medium",
+        breaking: 1,
