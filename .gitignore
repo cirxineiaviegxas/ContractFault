@@ -1,2 +1,3 @@
 # Go build artifacts
 /bin/
+*.test
