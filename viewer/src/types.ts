@@ -20,3 +20,8 @@ export interface Summary {
 export interface ChangeImpact {
   code: string;
   category: Category;
+  severity: Severity;
+  location: string;
+  endpoint?: string;
+  fieldPath?: string;
+  paramKey?: string;
