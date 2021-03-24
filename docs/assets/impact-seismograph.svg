@@ -6,3 +6,5 @@
   <line x1="20" y1="210" x2="700" y2="210" stroke="#30363d" stroke-width="1" stroke-dasharray="6 5" />
   <polyline points="20,210 46.0,210 60.0,142.0 74.0,237.2 78.0,210 246.0,210 260.0,170.6 274.0,225.8 278.0,210 446.0,210 460.0,187.9 474.0,218.8 478.0,210 646.0,210 660.0,194.7 674.0,216.1 678.0,210 700,210" fill="none" stroke="#e5484d" stroke-width="2" stroke-opacity="0.9">
     <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+  </polyline>
+  
