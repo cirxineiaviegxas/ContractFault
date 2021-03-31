@@ -153,3 +153,42 @@ func (d *Diff) diffEndpoints(oldC, newC *contract.Contract) {
 				Detail:    fmt.Sprintf("endpoint %s %s (%s) was added", ne.Method, ne.Path, id),
 				Migration: "No action required; new capability is available to adopt.",
 			})
+		}
+	}
+}
+
+// diffEndpointPair classifies differences within a single correlated endpoint.
+func (d *Diff) diffEndpointPair(oe, ne contract.Endpoint) {
+	if oe.Method != ne.Method {
+		d.add(Change{
+			Code:      "endpoint.method.changed",
+			Category:  Breaking,
+			Severity:  Critical.String(),
+			Location:  ne.ID,
+			Endpoint:  ne.ID,
+			Detail:    fmt.Sprintf("method changed %s -> %s", oe.Method, ne.Method),
+			Migration: fmt.Sprintf("Update the HTTP verb from %s to %s.", oe.Method, ne.Method),
+		})
+	}
+	if oe.Path != ne.Path {
+		d.add(Change{
+			Code:      "endpoint.path.changed",
+			Category:  Breaking,
+			Severity:  Major.String(),
+			Location:  ne.ID,
+			Endpoint:  ne.ID,
+			Detail:    fmt.Sprintf("path changed %s -> %s", oe.Path, ne.Path),
+			Migration: fmt.Sprintf("Update the request URL template to %s.", ne.Path),
+		})
+	}
+	if !oe.Deprecated && ne.Deprecated {
+		d.add(Change{
+			Code:      "endpoint.deprecated",
+			Category:  Behavioral,
+			Severity:  Minor.String(),
+			Location:  ne.ID,
+			Endpoint:  ne.ID,
+			Detail:    "endpoint marked deprecated",
+			Migration: "Plan migration off this endpoint; it may be removed in a future version.",
+		})
+	}
