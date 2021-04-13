@@ -58,3 +58,15 @@ function sample(overrides: Partial<Report> = {}): Report {
         breaking: 0,
         additive: 0,
         behavioral: 0,
+        codes: [],
+        score: 0,
+      },
+    ],
+    ...overrides,
+  };
+}
+
+test("parseReport accepts a valid report", () => {
+  const r = parseReport(sample());
+  assert.equal(r.service, "orders-api");
+});
