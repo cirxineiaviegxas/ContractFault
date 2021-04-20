@@ -192,3 +192,41 @@ func (d *Diff) diffEndpointPair(oe, ne contract.Endpoint) {
 			Migration: "Plan migration off this endpoint; it may be removed in a future version.",
 		})
 	}
+	if oe.Idempotent != ne.Idempotent {
+		d.add(Change{
+			Code:      "endpoint.idempotency.changed",
+			Category:  Behavioral,
+			Severity:  Major.String(),
+			Location:  ne.ID,
+			Endpoint:  ne.ID,
+			Detail:    fmt.Sprintf("idempotency changed %v -> %v", oe.Idempotent, ne.Idempotent),
+			Migration: "Review retry logic: repeated calls may no longer be safe.",
+		})
+	}
+	if oe.RequestType != ne.RequestType {
+		d.add(Change{
+			Code:      "endpoint.requestType.changed",
+			Category:  Breaking,
+			Severity:  Major.String(),
+			Location:  ne.ID,
+			Endpoint:  ne.ID,
+			Detail:    fmt.Sprintf("request body type changed %q -> %q", oe.RequestType, ne.RequestType),
+			Migration: "Rebuild the request body to match the new type.",
+		})
+	}
+	d.diffParams(oe, ne)
+	d.diffResponses(oe, ne)
+}
+
+// diffParams classifies parameter differences within an endpoint.
+func (d *Diff) diffParams(oe, ne contract.Endpoint) {
+	oldP := map[string]contract.Param{}
+	for _, p := range oe.Params {
+		oldP[p.Key()] = p
+	}
+	newP := map[string]contract.Param{}
+	for _, p := range ne.Params {
+		newP[p.Key()] = p
+	}
+	for k, op := range oldP {
+		np, ok := newP[k]
