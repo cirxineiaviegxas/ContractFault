@@ -16,3 +16,9 @@ func TestResolveConsumerPathsGlob(t *testing.T) {
 		}
 	}
 	paths, err := resolveConsumerPaths(filepath.Join(dir, "*.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(paths) != 2 || filepath.Base(paths[0]) != "a.json" {
+		t.Fatalf("glob resolution wrong/unsorted: %v", paths)
+	}
