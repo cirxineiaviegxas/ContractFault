@@ -8,3 +8,5 @@
     <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
   </polyline>
   
+    <g>
+      <circle cx="60.0" cy="210" r="32.0" fill="#e5484d" fill-opacity="0.85">
