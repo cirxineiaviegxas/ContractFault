@@ -23,3 +23,9 @@
     },
     "Order": {
       "kind": "object",
+      "fields": {
+        "id": { "type": "string", "required": true },
+        "status": { "type": "OrderStatus", "required": true },
+        "items": { "type": "LineItem", "required": true, "array": true },
+        "total": { "type": "Money", "required": true },
+        "note": { "type": "string", "nullable": true, "doc": "free-form customer note" },
