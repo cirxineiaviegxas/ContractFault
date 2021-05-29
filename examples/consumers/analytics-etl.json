@@ -2,3 +2,4 @@
   "name": "analytics-etl",
   "team": "data-platform",
   "criticality": "medium",
+  "uses": [
