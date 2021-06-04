@@ -5,3 +5,5 @@
   "license": "MIT",
   "type": "module",
   "bin": {
+    "contractfault-viewer": "dist/cli.js"
+  },
