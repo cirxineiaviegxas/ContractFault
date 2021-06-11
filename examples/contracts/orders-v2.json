@@ -20,3 +20,10 @@
         "sku": { "type": "string", "required": true },
         "qty": { "type": "integer", "required": true },
         "price": { "type": "Money", "required": true },
+        "giftWrapped": { "type": "boolean" }
+      }
+    },
+    "Order": {
+      "kind": "object",
+      "fields": {
+        "id": { "type": "string", "required": true },
