@@ -10,3 +10,5 @@
   
     <g>
       <circle cx="60.0" cy="210" r="32.0" fill="#e5484d" fill-opacity="0.85">
+        <animate attributeName="r" values="32.0;36.0;32.0" dur="3.70s" repeatCount="indefinite" />
+      </circle>
