@@ -142,3 +142,27 @@ CHANGES (sorted by severity)
       code: endpoint.path.changed
       hits: checkout-web
       fix : Update the request URL template to /orders/{id}.
+  !! [major   ] Order.couponCode             field Order.couponCode removed
+      code: field.removed
+      hits: analytics-etl, checkout-web
+      fix : Stop reading Order.couponCode; it is no longer present.
+  !! [major   ] listOrders#query:limit       parameter query:limit became required
+      code: param.required.added
+      hits: analytics-etl, fulfillment-worker
+      fix : Always supply limit; requests without it will be rejected.
+  !! [major   ] OrderStatus                  type OrderStatus dropped enum values refunded
+      code: type.enum.removed
+      fix : Handle the removed enum values as invalid; they will no longer be produced.
+  ~~ [minor   ] OrderStatus                  type OrderStatus gained enum values authorized,delivered
+      code: type.enum.added
+      fix : Ensure consumers tolerate the new enum values.
+  ++ [info    ] Money.display                field Money.display added (required=false)
+      code: field.added
+      hits: receipts-mailer
+      fix : New optional field; read it when useful.
+
+CONSUMER BLAST RADIUS
+  checkout-web       high    score=35.3  breaking=3 additive=1 behavioral=1
+  analytics-etl      medium  score=18.5  breaking=3 additive=1 behavioral=0
+  fulfillment-worker high    score=8.3  breaking=1 additive=1 behavioral=0
+  receipts-mailer    low     score=4.3  breaking=1 additive=1 behavioral=0
