@@ -33,3 +33,21 @@ type Contract struct {
 // value constraints for scalar types.
 type Type struct {
 	// Name is the type identifier, mirrored from the map key for convenience.
+	Name string `json:"name,omitempty"`
+	// Kind is one of "object", "string", "integer", "number", "boolean".
+	// Object types carry Fields; scalar types may carry Enum.
+	Kind string `json:"kind"`
+	// Fields are the members of an object type keyed by field name.
+	Fields map[string]Field `json:"fields,omitempty"`
+	// Enum lists the permitted values for a scalar type. An empty slice means
+	// the scalar is unconstrained.
+	Enum []string `json:"enum,omitempty"`
+	// Deprecated marks the whole type as scheduled for removal.
+	Deprecated bool `json:"deprecated,omitempty"`
+}
+
+// Field is a member of an object type.
+type Field struct {
+	// TypeRef names the type of the field. It is either a builtin scalar
+	// ("string", "integer", "number", "boolean") or the name of a Type.
+	TypeRef string `json:"type"`
