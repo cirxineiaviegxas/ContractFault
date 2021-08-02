@@ -22,3 +22,11 @@ func TestParseNormalizesMethodAndTypeName(t *testing.T) {
 		t.Fatalf("parse: %v", err)
 	}
 	if got := c.Endpoints[0].Method; got != "GET" {
+		t.Errorf("method not upper-cased: %q", got)
+	}
+	if got := c.Types["Widget"].Name; got != "Widget" {
+		t.Errorf("type name not mirrored: %q", got)
+	}
+}
+
+func TestValidateRejectsUnknownRequestType(t *testing.T) {
