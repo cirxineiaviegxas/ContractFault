@@ -14,3 +14,7 @@ func TestCriticalityWeight(t *testing.T) {
 
 func TestValidateRejectsBadCriticality(t *testing.T) {
 	m := Manifest{Name: "c", Criticality: "extreme"}
+	if err := m.Validate(); err == nil {
+		t.Fatal("expected invalid criticality error")
+	}
+}
