@@ -51,3 +51,21 @@ type Field struct {
 	// TypeRef names the type of the field. It is either a builtin scalar
 	// ("string", "integer", "number", "boolean") or the name of a Type.
 	TypeRef string `json:"type"`
+	// Required indicates the field must always be present in a payload.
+	Required bool `json:"required,omitempty"`
+	// Nullable indicates the field may carry an explicit null value.
+	Nullable bool `json:"nullable,omitempty"`
+	// Array indicates the field is a homogeneous list of TypeRef values.
+	Array bool `json:"array,omitempty"`
+	// Deprecated marks the field as scheduled for removal.
+	Deprecated bool `json:"deprecated,omitempty"`
+	// Doc is a short human description used in migration hints.
+	Doc string `json:"doc,omitempty"`
+}
+
+// Endpoint is a single API operation.
+type Endpoint struct {
+	// ID is a stable operation identifier ("getOrder"). It is the primary key
+	// used to correlate an endpoint across versions.
+	ID string `json:"id"`
+	// Method is the HTTP verb, upper-cased on load.
