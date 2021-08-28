@@ -38,3 +38,16 @@ func TestEndpointRemovedIsBreakingCritical(t *testing.T) {
 }
 
 func TestEndpointAddedIsAdditive(t *testing.T) {
+	oldC := build("1", nil)
+	newC := build("2", nil, contract.Endpoint{ID: "a", Method: "GET", Path: "/a"})
+	d, _ := Compare(oldC, newC)
+	if c := find(d, "endpoint.added"); c == nil || c.Category != Additive {
+		t.Fatalf("endpoint.added not additive: %+v", c)
+	}
+}
+
+func TestRequiredFieldAddedIsBreaking(t *testing.T) {
+	oldT := map[string]contract.Type{"T": {Kind: "object", Fields: map[string]contract.Field{}}}
+	newT := map[string]contract.Type{"T": {Kind: "object", Fields: map[string]contract.Field{
+		"x": {TypeRef: "string", Required: true},
+	}}}
