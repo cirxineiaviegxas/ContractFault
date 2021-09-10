@@ -81,3 +81,13 @@ func run(args []string, out, errw *os.File) int {
 	paths, err := resolveConsumerPaths(opts.consumers)
 	if err != nil {
 		fmt.Fprintf(errw, "contractfault: %v\n", err)
+		return usageExit
+	}
+	consumers, err := consumer.LoadAll(paths)
+	if err != nil {
+		fmt.Fprintf(errw, "contractfault: %v\n", err)
+		return usageExit
+	}
+
+	diff, err := analyze.Compare(oldC, newC)
+	if err != nil {
