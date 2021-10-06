@@ -18,3 +18,6 @@ func TestValidateRejectsBadCriticality(t *testing.T) {
 		t.Fatal("expected invalid criticality error")
 	}
 }
+
+func TestValidateDefaultsEmptyCriticality(t *testing.T) {
+	m := Manifest{Name: "c"}
