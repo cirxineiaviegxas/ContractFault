@@ -19,3 +19,6 @@ jobs:
       - name: Test
         run: go test ./...
       - name: Build CLI
+        run: go build -o bin/contractfault ./cmd/contractfault
+      - name: Contract gate (expect rupture, exit 2)
+        run: |
