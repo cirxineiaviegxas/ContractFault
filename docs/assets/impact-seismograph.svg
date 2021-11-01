@@ -12,3 +12,5 @@
       <circle cx="60.0" cy="210" r="32.0" fill="#e5484d" fill-opacity="0.85">
         <animate attributeName="r" values="32.0;36.0;32.0" dur="3.70s" repeatCount="indefinite" />
       </circle>
+      <text x="60.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">checkout-web</text>
+      <text x="60.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">35.3</text>
