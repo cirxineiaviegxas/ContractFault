@@ -21,3 +21,8 @@ func TestFieldChangeOnlyHitsReaders(t *testing.T) {
 			{Endpoint: "getOrder", ReadsFields: []string{"Order.couponCode"}}}},
 		{Name: "nonreader", Criticality: "high", Uses: []consumer.Usage{
 			{Endpoint: "getOrder", ReadsFields: []string{"Order.id"}}}},
+	}
+	r := Build(d, consumers)
+	if len(r.Changes[0].Consumers) != 1 || r.Changes[0].Consumers[0] != "reader" {
+		t.Fatalf("expected only reader affected, got %v", r.Changes[0].Consumers)
+	}
