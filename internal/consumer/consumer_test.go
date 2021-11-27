@@ -21,3 +21,6 @@ func TestValidateRejectsBadCriticality(t *testing.T) {
 
 func TestValidateDefaultsEmptyCriticality(t *testing.T) {
 	m := Manifest{Name: "c"}
+	if err := m.Validate(); err != nil {
+		t.Fatal(err)
+	}
