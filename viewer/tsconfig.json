@@ -5,3 +5,4 @@
     "moduleResolution": "node",
     "lib": ["ES2022"],
     "outDir": "dist",
+    "rootDir": "src",
