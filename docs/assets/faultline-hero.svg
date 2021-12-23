@@ -12,3 +12,7 @@
       <stop offset="50%" stop-color="#e5484d" stop-opacity="0.9" />
       <stop offset="100%" stop-color="#f5a623" stop-opacity="0" />
     </linearGradient>
+  </defs>
+
+  <rect width="900" height="300" fill="url(#sky)" />
+
