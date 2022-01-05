@@ -16,3 +16,9 @@ import { parseReport } from "./types.js";
 import { renderSvg, renderTerminal } from "./seismic.js";
 
 interface Args {
+  input: string;
+  svgOut?: string;
+  color: boolean;
+}
+
+export function parseArgs(argv: string[]): Args {
