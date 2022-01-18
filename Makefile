@@ -18,3 +18,7 @@ REPORT    ?= $(EXAMPLES)/report.json
         report demo svg fmt vet clean tidy ci
 
 all: build test
+
+## build: compile the Go CLI and the TypeScript viewer.
+build: build-go build-viewer
+
