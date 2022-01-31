@@ -34,3 +34,11 @@
         "customerId": { "type": "string", "required": true, "doc": "owning customer" }
       }
     },
+    "CreateOrderRequest": {
+      "kind": "object",
+      "fields": {
+        "items": { "type": "LineItem", "required": true, "array": true },
+        "couponCode": { "type": "string" },
+        "customerId": { "type": "string", "required": true }
+      }
+    },
