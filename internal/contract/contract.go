@@ -69,3 +69,20 @@ type Endpoint struct {
 	// used to correlate an endpoint across versions.
 	ID string `json:"id"`
 	// Method is the HTTP verb, upper-cased on load.
+	Method string `json:"method"`
+	// Path is the templated URL path ("/orders/{id}").
+	Path string `json:"path"`
+	// Params are the request parameters (path, query, header).
+	Params []Param `json:"params,omitempty"`
+	// RequestType names the request body Type, empty for bodiless operations.
+	RequestType string `json:"requestType,omitempty"`
+	// Responses maps status code (as string) to the response body Type name.
+	Responses map[string]string `json:"responses,omitempty"`
+	// Deprecated marks the operation as scheduled for removal.
+	Deprecated bool `json:"deprecated,omitempty"`
+	// Idempotent documents whether repeated calls are safe; a change here is a
+	// behavioral change even though the shape is identical.
+	Idempotent bool `json:"idempotent,omitempty"`
+}
+
+// Param is a request parameter.
