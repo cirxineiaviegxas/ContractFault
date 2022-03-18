@@ -42,3 +42,12 @@ func Text(r *impact.Report) string {
 
 	if len(r.Changes) == 0 {
 		b.WriteString("no changes detected; the fault line is quiet.\n")
+		return b.String()
+	}
+
+	b.WriteString("CHANGES (sorted by severity)\n")
+	for _, ch := range r.Changes {
+		marker := categoryMarker(ch.Category)
+		fmt.Fprintf(&b, "  %s [%-8s] %-28s %s\n", marker, ch.Severity, ch.Location, ch.Detail)
+		fmt.Fprintf(&b, "      code: %s\n", ch.Code)
+		if len(ch.Consumers) > 0 {
