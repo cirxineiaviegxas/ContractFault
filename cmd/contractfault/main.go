@@ -102,3 +102,13 @@ func run(args []string, out, errw *os.File) int {
 		rendered, err = report.JSON(rep)
 		if err != nil {
 			fmt.Fprintf(errw, "contractfault: %v\n", err)
+			return usageExit
+		}
+	case "text":
+		rendered = []byte(report.Text(rep))
+	default:
+		fmt.Fprintf(errw, "contractfault: unknown format %q (want text|json)\n", opts.format)
+		return usageExit
+	}
+
+	if opts.quiet {
