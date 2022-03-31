@@ -28,3 +28,9 @@ export function parseArgs(argv: string[]): Args {
     if (a === "--svg") {
       args.svgOut = argv[++i];
     } else if (a === "--no-color") {
+      args.color = false;
+    } else if (!a.startsWith("-") && args.input === "") {
+      args.input = a;
+    } else {
+      throw new Error(`unknown argument: ${a}`);
+    }
