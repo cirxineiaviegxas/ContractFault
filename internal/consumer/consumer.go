@@ -41,3 +41,13 @@ type Usage struct {
 	// Params lists request parameter keys ("query:status") the consumer sets.
 	Params []string `json:"params,omitempty"`
 }
+
+// CriticalityWeight maps the criticality label to a numeric multiplier.
+func (m Manifest) CriticalityWeight() int {
+	switch strings.ToLower(m.Criticality) {
+	case "high":
+		return 3
+	case "medium":
+		return 2
+	case "low":
+		return 1
