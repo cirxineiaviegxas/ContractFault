@@ -23,3 +23,8 @@ func TestExitCodeShaken(t *testing.T) {
 }
 
 func TestExitCodeStable(t *testing.T) {
+	r := &impact.Report{Summary: impact.Summary{Additive: 3}}
+	if got := ExitCode(r, false); got != 0 {
+		t.Fatalf("additive-only should exit 0, got %d", got)
+	}
+}
