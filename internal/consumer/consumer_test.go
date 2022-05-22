@@ -28,3 +28,6 @@ func TestValidateDefaultsEmptyCriticality(t *testing.T) {
 		t.Fatalf("empty criticality should default to low, got %q", m.Criticality)
 	}
 }
+
+func TestFieldPathsUnion(t *testing.T) {
+	m := Manifest{Name: "c", Uses: []Usage{
