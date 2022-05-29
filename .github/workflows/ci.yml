@@ -22,3 +22,6 @@ jobs:
         run: go build -o bin/contractfault ./cmd/contractfault
       - name: Contract gate (expect rupture, exit 2)
         run: |
+          set +e
+          ./bin/contractfault \
+            -old examples/contracts/orders-v1.json \
