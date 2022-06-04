@@ -132,3 +132,26 @@
       "severity": "info",
       "location": "Error.traceId",
       "fieldPath": "Error.traceId",
+      "detail": "field Error.traceId added (required=false)",
+      "migration": "New optional field; read it when useful.",
+      "consumers": []
+    },
+    {
+      "code": "field.added",
+      "category": "additive",
+      "severity": "info",
+      "location": "LineItem.giftWrapped",
+      "fieldPath": "LineItem.giftWrapped",
+      "detail": "field LineItem.giftWrapped added (required=false)",
+      "migration": "New optional field; read it when useful.",
+      "consumers": []
+    },
+    {
+      "code": "field.added",
+      "category": "additive",
+      "severity": "info",
+      "location": "Money.display",
+      "fieldPath": "Money.display",
+      "detail": "field Money.display added (required=false)",
+      "migration": "New optional field; read it when useful.",
+      "consumers": [
