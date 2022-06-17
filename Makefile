@@ -22,3 +22,7 @@ all: build test
 ## build: compile the Go CLI and the TypeScript viewer.
 build: build-go build-viewer
 
+build-go:
+	$(GO) build -o $(BIN) ./cmd/contractfault
+
+build-viewer:
