@@ -25,3 +25,6 @@ jobs:
           set +e
           ./bin/contractfault \
             -old examples/contracts/orders-v1.json \
+            -new examples/contracts/orders-v2.json \
+            -consumers "examples/consumers/*.json" \
+            -format json -out report.json
