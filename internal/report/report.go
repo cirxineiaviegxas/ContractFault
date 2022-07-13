@@ -51,3 +51,12 @@ func Text(r *impact.Report) string {
 		fmt.Fprintf(&b, "  %s [%-8s] %-28s %s\n", marker, ch.Severity, ch.Location, ch.Detail)
 		fmt.Fprintf(&b, "      code: %s\n", ch.Code)
 		if len(ch.Consumers) > 0 {
+			fmt.Fprintf(&b, "      hits: %s\n", strings.Join(ch.Consumers, ", "))
+		}
+		fmt.Fprintf(&b, "      fix : %s\n", ch.Migration)
+	}
+
+	b.WriteString("\nCONSUMER BLAST RADIUS\n")
+	for _, c := range r.Consumers {
+		total := c.Breaking + c.Additive + c.Behavioral
+		if total == 0 {
