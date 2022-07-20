@@ -70,3 +70,15 @@ test("parseReport accepts a valid report", () => {
   const r = parseReport(sample());
   assert.equal(r.service, "orders-api");
 });
+
+test("parseReport rejects wrong schema", () => {
+  assert.throws(() => parseReport({ ...sample(), schema: "other" }), /unsupported schema/);
+});
+
+test("parseReport rejects non-object", () => {
+  assert.throws(() => parseReport(42), /expected a JSON object/);
+});
+
+test("magnitudeBar clamps and fills proportionally", () => {
+  assert.equal(magnitudeBar(0, 10), "[----------]");
+  assert.equal(magnitudeBar(10, 10), "[##########]");
