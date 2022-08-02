@@ -28,3 +28,6 @@ jobs:
             -new examples/contracts/orders-v2.json \
             -consumers "examples/consumers/*.json" \
             -format json -out report.json
+          code=$?
+          echo "analyzer exit code: $code"
+          test "$code" -eq 2
