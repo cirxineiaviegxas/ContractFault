@@ -25,3 +25,9 @@ export interface ChangeImpact {
   endpoint?: string;
   fieldPath?: string;
   paramKey?: string;
+  detail: string;
+  migration: string;
+  consumers: string[];
+}
+
+export interface ConsumerImpact {
