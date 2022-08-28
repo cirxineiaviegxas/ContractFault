@@ -16,3 +16,6 @@
 
   <rect width="900" height="300" fill="url(#sky)" />
 
+  <path d="M0 130 L180 130 L210 118 L340 118 L370 132 L520 132 L560 116 L700 116 L740 130 L900 130 L900 0 L0 0 Z"
+        fill="#21262d" stroke="#30363d" stroke-width="1">
+    <animateTransform attributeName="transform" type="translate"
