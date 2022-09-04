@@ -2,3 +2,4 @@
   "name": "receipts-mailer",
   "team": "notifications",
   "criticality": "low",
+  "uses": [
