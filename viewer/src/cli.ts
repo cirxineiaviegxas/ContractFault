@@ -34,3 +34,10 @@ export function parseArgs(argv: string[]): Args {
     } else {
       throw new Error(`unknown argument: ${a}`);
     }
+  }
+  if (args.input === "") {
+    throw new Error("usage: contractfault-viewer <report.json> [--svg out.svg] [--no-color]");
+  }
+  return args;
+}
+
