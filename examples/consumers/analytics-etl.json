@@ -6,3 +6,4 @@
     {
       "endpoint": "listOrders",
       "params": ["query:limit"],
+      "readsFields": ["Order.id", "Order.total", "Order.status", "Money.amount", "Money.currency"]
