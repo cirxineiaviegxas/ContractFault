@@ -60,3 +60,12 @@ func Text(r *impact.Report) string {
 	for _, c := range r.Consumers {
 		total := c.Breaking + c.Additive + c.Behavioral
 		if total == 0 {
+			fmt.Fprintf(&b, "  %-18s %-6s  unaffected\n", c.Name, c.Criticality)
+			continue
+		}
+		fmt.Fprintf(&b, "  %-18s %-6s  score=%.1f  breaking=%d additive=%d behavioral=%d\n",
+			c.Name, c.Criticality, c.Score, c.Breaking, c.Additive, c.Behavioral)
+	}
+	return b.String()
+}
+
