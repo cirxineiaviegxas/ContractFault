@@ -51,3 +51,14 @@ func (m Manifest) CriticalityWeight() int {
 		return 2
 	case "low":
 		return 1
+	default:
+		return 1
+	}
+}
+
+// Validate enforces manifest invariants.
+func (m *Manifest) Validate() error {
+	if strings.TrimSpace(m.Name) == "" {
+		return fmt.Errorf("consumer: manifest has empty name")
+	}
+	switch strings.ToLower(m.Criticality) {
