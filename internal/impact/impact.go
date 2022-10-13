@@ -86,3 +86,16 @@ func severityWeight(sev string) float64 {
 func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 	r := &Report{
 		Schema:      "contractfault/v1",
+		Service:     diff.Service,
+		FromVersion: diff.FromVersion,
+		ToVersion:   diff.ToVersion,
+	}
+
+	// Per-consumer accumulators.
+	type acc struct {
+		m          consumer.Manifest
+		breaking   int
+		additive   int
+		behavioral int
+		codes      map[string]bool
+		score      float64
