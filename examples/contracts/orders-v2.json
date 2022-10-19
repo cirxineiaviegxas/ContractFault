@@ -42,3 +42,10 @@
         "customerId": { "type": "string", "required": true }
       }
     },
+    "Error": {
+      "kind": "object",
+      "fields": {
+        "code": { "type": "string", "required": true },
+        "message": { "type": "string", "required": true },
+        "traceId": { "type": "string" }
+      }
