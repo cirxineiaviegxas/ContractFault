@@ -4,3 +4,5 @@
   "criticality": "high",
   "uses": [
     {
+      "endpoint": "createOrder",
+      "writesFields": ["CreateOrderRequest.items", "CreateOrderRequest.couponCode"],
