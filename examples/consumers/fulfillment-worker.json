@@ -5,3 +5,4 @@
   "uses": [
     {
       "endpoint": "listOrders",
+      "params": ["query:status"],
