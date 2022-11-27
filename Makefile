@@ -26,3 +26,7 @@ build-go:
 	$(GO) build -o $(BIN) ./cmd/contractfault
 
 build-viewer:
+	cd $(VIEWER) && $(NPM) install --no-audit --no-fund && $(NPM) run build
+
+## test: run all Go and TypeScript tests.
+test: test-go test-viewer
