@@ -77,3 +77,22 @@ ignored.
 ```
 
 | Field         | Type              | Meaning                                                                 |
+|---------------|-------------------|-------------------------------------------------------------------------|
+| `id`          | string            | **Stable** operation id — the correlation key across versions.          |
+| `method`      | string            | HTTP verb, upper-cased on load.                                         |
+| `path`        | string            | Templated URL path.                                                     |
+| `params`      | array of `Param`  | Path / query / header parameters.                                       |
+| `requestType` | string            | Name of the request body `Type` (omit for bodiless operations).         |
+| `responses`   | object            | Maps status code (string) → response body `Type` name.                  |
+| `deprecated`  | boolean           | Operation scheduled for removal.                                        |
+| `idempotent`  | boolean           | Whether repeated calls are safe (a change here is *behavioral*).        |
+
+Because `id` is the correlation key, you may freely rename a `path` or change a
+`method` and contractfault still recognizes it as the *same* operation and
+reports the mutation, rather than a delete + add.
+
+### 1.4 Param
+
+| Field      | Type            | Meaning                                    |
+|------------|-----------------|--------------------------------------------|
+| `name`     | string          | Parameter name.                            |
