@@ -78,3 +78,19 @@ export function renderTerminal(report: Report, opts: RenderOptions = { color: tr
   lines.push(
     `${paint("breaking " + s.breaking, RED, c)}  ` +
       `${paint("additive " + s.additive, GREEN, c)}  ` +
+      `${paint("behavioral " + s.behavioral, YELLOW, c)}  ` +
+      `affected ${s.affectedConsumers}`,
+  );
+  lines.push("");
+
+  lines.push(paint("TREMORS", BOLD, c));
+  for (const ch of report.changes) {
+    const glyph = paint(categoryGlyph(ch.category), severityColor(ch.severity), c);
+    const loc = ch.location.padEnd(28).slice(0, 28);
+    lines.push(`  ${glyph} ${paint(ch.severity.padEnd(8), severityColor(ch.severity), c)} ${loc} ${ch.detail}`);
+    if (ch.consumers && ch.consumers.length > 0) {
+      lines.push(`      ${paint("hits", DIM, c)} ${ch.consumers.join(", ")}`);
+    }
+  }
+  lines.push("");
+
