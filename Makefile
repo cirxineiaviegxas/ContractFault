@@ -30,3 +30,7 @@ build-viewer:
 
 ## test: run all Go and TypeScript tests.
 test: test-go test-viewer
+
+test-go:
+	$(GO) test ./...
+
