@@ -78,3 +78,17 @@ func TestNullableAddedIsBehavioral(t *testing.T) {
 	}}}
 	d, _ := Compare(build("1", oldT), build("2", newT))
 	if c := find(d, "field.nullable.added"); c == nil || c.Category != Behavioral {
+		t.Fatalf("nullable added should be behavioral: %+v", c)
+	}
+}
+
+func TestEnumRemovedIsBreaking(t *testing.T) {
+	oldT := map[string]contract.Type{"S": {Kind: "string", Enum: []string{"a", "b", "c"}}}
+	newT := map[string]contract.Type{"S": {Kind: "string", Enum: []string{"a", "b"}}}
+	d, _ := Compare(build("1", oldT), build("2", newT))
+	c := find(d, "type.enum.removed")
+	if c == nil || c.Category != Breaking {
+		t.Fatalf("enum removal should be breaking: %+v", c)
+	}
+}
+
