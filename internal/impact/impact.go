@@ -99,3 +99,15 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 		behavioral int
 		codes      map[string]bool
 		score      float64
+	}
+	accs := make(map[string]*acc, len(consumers))
+	order := make([]string, 0, len(consumers))
+	for _, m := range consumers {
+		accs[m.Name] = &acc{m: m, codes: map[string]bool{}}
+		order = append(order, m.Name)
+	}
+
+	var magnitude float64
+	for _, ch := range diff.Changes {
+		affected := affectedConsumers(ch, consumers)
+		ci := ChangeImpact{Change: ch, Consumers: affected}
