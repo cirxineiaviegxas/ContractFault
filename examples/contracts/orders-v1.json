@@ -42,3 +42,9 @@
     "Error": {
       "kind": "object",
       "fields": {
+        "code": { "type": "string", "required": true },
+        "message": { "type": "string", "required": true }
+      }
+    }
+  },
+  "endpoints": [
