@@ -49,3 +49,11 @@
         "message": { "type": "string", "required": true },
         "traceId": { "type": "string" }
       }
+    }
+  },
+  "endpoints": [
+    {
+      "id": "listOrders",
+      "method": "GET",
+      "path": "/orders",
+      "idempotent": true,
