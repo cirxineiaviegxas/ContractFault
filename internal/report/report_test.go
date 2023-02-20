@@ -28,3 +28,8 @@ func TestExitCodeStable(t *testing.T) {
 		t.Fatalf("additive-only should exit 0, got %d", got)
 	}
 }
+
+func TestExitCodeFailOnBehavioral(t *testing.T) {
+	r := &impact.Report{Summary: impact.Summary{Behavioral: 1}}
+	if got := ExitCode(r, true); got != 2 {
+		t.Fatalf("fail-on-behavioral should exit 2, got %d", got)
