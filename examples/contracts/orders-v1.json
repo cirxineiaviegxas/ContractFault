@@ -48,3 +48,9 @@
     }
   },
   "endpoints": [
+    {
+      "id": "listOrders",
+      "method": "GET",
+      "path": "/orders",
+      "idempotent": true,
+      "params": [
