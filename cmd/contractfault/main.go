@@ -143,3 +143,14 @@ func parseFlags(args []string, errw *os.File) (*options, error) {
 	fs.StringVar(&opts.oldPath, "old", "", "path to the previous contract version (required)")
 	fs.StringVar(&opts.newPath, "new", "", "path to the new contract version (required)")
 	fs.StringVar(&opts.consumers, "consumers", "", "glob or comma-separated list of consumer manifest paths")
+	fs.StringVar(&opts.format, "format", "text", "output format: text|json")
+	fs.StringVar(&opts.out, "out", "", "write report to file instead of stdout")
+	fs.BoolVar(&opts.failOnBehavioral, "fail-on-behavioral", false, "treat behavioral-only shifts as a failure (exit 2)")
+	fs.BoolVar(&opts.quiet, "quiet", false, "print only the verdict summary line")
+	fs.Usage = func() {
+		fmt.Fprintf(errw, "contractfault: API contract consumer-impact analyzer\n\n")
+		fmt.Fprintf(errw, "usage: contractfault -old before.json -new after.json -consumers 'consumers/*.json'\n\n")
+		fs.PrintDefaults()
+	}
+	if err := fs.Parse(args); err != nil {
+		return nil, err
