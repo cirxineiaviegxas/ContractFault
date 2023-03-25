@@ -86,3 +86,21 @@ type Endpoint struct {
 }
 
 // Param is a request parameter.
+type Param struct {
+	// Name is the parameter name.
+	Name string `json:"name"`
+	// In is the location: "path", "query" or "header".
+	In string `json:"in"`
+	// TypeRef is the scalar type of the parameter value.
+	TypeRef string `json:"type"`
+	// Required indicates the parameter must be supplied.
+	Required bool `json:"required,omitempty"`
+	// Enum constrains the permitted values.
+	Enum []string `json:"enum,omitempty"`
+}
+
+// Key returns the correlation key for a parameter within an endpoint.
+func (p Param) Key() string { return p.In + ":" + p.Name }
+
+// EndpointByID indexes the contract's endpoints by their stable ID.
+func (c *Contract) EndpointByID() map[string]Endpoint {
