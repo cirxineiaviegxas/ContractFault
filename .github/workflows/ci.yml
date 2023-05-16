@@ -31,3 +31,6 @@ jobs:
           code=$?
           echo "analyzer exit code: $code"
           test "$code" -eq 2
+
+  viewer:
+    name: TypeScript viewer
