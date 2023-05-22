@@ -154,3 +154,13 @@ func parseFlags(args []string, errw *os.File) (*options, error) {
 	}
 	if err := fs.Parse(args); err != nil {
 		return nil, err
+	}
+	if opts.oldPath == "" || opts.newPath == "" {
+		return nil, fmt.Errorf("both -old and -new are required")
+	}
+	return opts, nil
+}
+
+// resolveConsumerPaths expands a spec that may be a glob, a comma-separated
+// list, or a mix, into a sorted, de-duplicated list of manifest file paths.
+func resolveConsumerPaths(spec string) ([]string, error) {
