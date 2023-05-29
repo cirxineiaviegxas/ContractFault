@@ -94,3 +94,20 @@ export function renderTerminal(report: Report, opts: RenderOptions = { color: tr
   }
   lines.push("");
 
+  lines.push(paint("BLAST RADIUS", BOLD, c));
+  for (const cons of report.consumers) {
+    lines.push(renderConsumerLine(cons, c));
+  }
+  return lines.join("\n") + "\n";
+}
+
+function renderConsumerLine(cons: ConsumerImpact, color: boolean): string {
+  const total = cons.breaking + cons.additive + cons.behavioral;
+  const name = cons.name.padEnd(20);
+  if (total === 0) {
+    return `  ${name} ${paint("quiet", DIM, color)}`;
+  }
+  const bar = "▓".repeat(Math.min(20, Math.max(1, Math.round(cons.score / 2))));
+  const barColor = cons.breaking > 0 ? RED : cons.behavioral > 0 ? YELLOW : GREEN;
+  return (
+    `  ${name} ${paint(bar, barColor, color)} ` +
