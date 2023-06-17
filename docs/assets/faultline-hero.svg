@@ -19,3 +19,7 @@
   <path d="M0 130 L180 130 L210 118 L340 118 L370 132 L520 132 L560 116 L700 116 L740 130 L900 130 L900 0 L0 0 Z"
         fill="#21262d" stroke="#30363d" stroke-width="1">
     <animateTransform attributeName="transform" type="translate"
+                      values="0 0; 0 -3; 0 0" dur="4s" repeatCount="indefinite" />
+  </path>
+
+  <path d="M0 170 L200 170 L230 182 L360 182 L390 168 L540 168 L580 184 L720 184 L760 170 L900 170 L900 300 L0 300 Z"
