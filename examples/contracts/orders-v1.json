@@ -54,3 +54,10 @@
       "path": "/orders",
       "idempotent": true,
       "params": [
+        { "name": "status", "in": "query", "type": "OrderStatus" },
+        { "name": "limit", "in": "query", "type": "integer" }
+      ],
+      "responses": { "200": "Order", "400": "Error" }
+    },
+    {
+      "id": "getOrder",
