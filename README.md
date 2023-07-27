@@ -166,3 +166,27 @@ CONSUMER BLAST RADIUS
   analytics-etl      medium  score=18.5  breaking=3 additive=1 behavioral=0
   fulfillment-worker high    score=8.3  breaking=1 additive=1 behavioral=0
   receipts-mailer    low     score=4.3  breaking=1 additive=1 behavioral=0
+```
+
+(The listing above is trimmed to the highest-severity tremors; the tool prints
+all fifteen. The `##...` bar is the magnitude meter on a 0–10 scale.)
+
+Read it top-down like a seismologist reads a drum: the biggest tremors are at
+the top, each annotated with **who feels it** (`hits:`) and **how to survive it**
+(`fix:`). The blast-radius footer ranks the towns by how hard they were shaken.
+
+---
+
+## The animated seismograph viewer
+
+Pipe the JSON report into the TypeScript viewer to draw the fault as a station
+map. Each consumer becomes a seismic station along the fault line; its dot grows
+with its risk score, and its color encodes the worst tremor it felt.
+
+```bash
+# Emit JSON from the analyzer, then render an SVG seismograph
+./bin/contractfault -old examples/contracts/orders-v1.json \
+    -new examples/contracts/orders-v2.json \
+    -consumers "examples/consumers/*.json" \
+    -format json -out examples/report.json
+
