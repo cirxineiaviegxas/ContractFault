@@ -34,3 +34,9 @@ func TestResolveConsumerPathsEmpty(t *testing.T) {
 	paths, err := resolveConsumerPaths("")
 	if err != nil || paths != nil {
 		t.Fatalf("empty spec should yield nil, got %v / %v", paths, err)
+	}
+}
+
+// TestRunEndToEnd exercises the whole pipeline against the shipped examples and
+// asserts the rupture exit code.
+func TestRunEndToEnd(t *testing.T) {
