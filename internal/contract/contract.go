@@ -104,3 +104,21 @@ func (p Param) Key() string { return p.In + ":" + p.Name }
 
 // EndpointByID indexes the contract's endpoints by their stable ID.
 func (c *Contract) EndpointByID() map[string]Endpoint {
+	out := make(map[string]Endpoint, len(c.Endpoints))
+	for _, e := range c.Endpoints {
+		out[e.ID] = e
+	}
+	return out
+}
+
+// Validate checks structural invariants and returns a descriptive error when
+// the document is internally inconsistent. It is deliberately strict so that a
+// malformed contract fails loudly rather than producing a misleading report.
+func (c *Contract) Validate() error {
+	if strings.TrimSpace(c.Service) == "" {
+		return fmt.Errorf("contract: service name is empty")
+	}
+	if strings.TrimSpace(c.Version) == "" {
+		return fmt.Errorf("contract: version is empty")
+	}
+	seen := make(map[string]bool)
