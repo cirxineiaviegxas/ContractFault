@@ -41,3 +41,9 @@ export function parseArgs(argv: string[]): Args {
   return args;
 }
 
+export function exitCodeFor(report: ReturnType<typeof parseReport>): number {
+  if (report.summary.breaking > 0) return 2;
+  if (report.summary.behavioral > 0) return 1;
+  return 0;
+}
+
