@@ -18,3 +18,5 @@
     <g>
       <circle cx="260.0" cy="210" r="19.6" fill="#e5484d" fill-opacity="0.85">
         <animate attributeName="r" values="19.6;23.6;19.6" dur="2.99s" repeatCount="indefinite" />
+      </circle>
+      <text x="260.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">analytics-etl</text>
