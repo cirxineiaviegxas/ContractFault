@@ -111,3 +111,16 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 	for _, ch := range diff.Changes {
 		affected := affectedConsumers(ch, consumers)
 		ci := ChangeImpact{Change: ch, Consumers: affected}
+		r.Changes = append(r.Changes, ci)
+
+		// The base tremor magnitude of a change is its severity weight; it is
+		// amplified by each affected consumer's criticality.
+		base := severityWeight(ch.Severity)
+		for _, name := range affected {
+			a := accs[name]
+			switch ch.Category {
+			case analyze.Breaking:
+				a.breaking++
+			case analyze.Additive:
+				a.additive++
+			case analyze.Behavioral:
