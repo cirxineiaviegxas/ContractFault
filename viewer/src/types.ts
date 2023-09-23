@@ -36,3 +36,9 @@ export interface ConsumerImpact {
   criticality: string;
   breaking: number;
   additive: number;
+  behavioral: number;
+  codes: string[];
+  score: number;
+}
+
+export interface Report {
