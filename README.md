@@ -190,3 +190,27 @@ with its risk score, and its color encodes the worst tremor it felt.
     -consumers "examples/consumers/*.json" \
     -format json -out examples/report.json
 
+cd viewer
+node dist/cli.js ../examples/report.json --svg ../docs/assets/impact-seismograph.svg
+```
+
+<div align="center">
+<img src="docs/assets/impact-seismograph.svg" alt="impact seismograph" width="80%" />
+</div>
+
+The viewer also renders a colorized terminal map with per-consumer amplitude
+bars, and — like the Go CLI — exits `2` on breaking, `1` on behavioral, `0` on
+stable, so it can double as a CI gate when reading a stored report.
+
+---
+
+## What counts as a tremor
+
+contractfault classifies every difference into one of three categories, and each
+category maps to a CI outcome. This is the crux of *not* being a text diff: the
+tool understands the **semantics** of a contract, not its bytes.
+
+| Category       | Feels like      | Examples                                              | CI |
+|----------------|-----------------|-------------------------------------------------------|----|
+| **breaking**   | the ground cracks | endpoint removed, method flip, required field added, enum value dropped, response type changed | exit 2 |
+| **behavioral** | the ground shifts | idempotency flip, field became nullable, enum value *added*, field deprecated | exit 1 |
