@@ -31,3 +31,6 @@ func TestValidateDefaultsEmptyCriticality(t *testing.T) {
 
 func TestFieldPathsUnion(t *testing.T) {
 	m := Manifest{Name: "c", Uses: []Usage{
+		{Endpoint: "a", ReadsFields: []string{"T.x"}, WritesFields: []string{"T.y"}},
+		{Endpoint: "b", ReadsFields: []string{"T.z"}},
+	}}
