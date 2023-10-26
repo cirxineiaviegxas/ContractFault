@@ -35,3 +35,8 @@ func TestEndpointChangeHitsAllCallers(t *testing.T) {
 	})
 	consumers := []consumer.Manifest{
 		{Name: "a", Criticality: "low", Uses: []consumer.Usage{{Endpoint: "getReceipt"}}},
+		{Name: "b", Criticality: "low", Uses: []consumer.Usage{{Endpoint: "other"}}},
+	}
+	r := Build(d, consumers)
+	if len(r.Changes[0].Consumers) != 1 || r.Changes[0].Consumers[0] != "a" {
+		t.Fatalf("expected only a, got %v", r.Changes[0].Consumers)
