@@ -8,3 +8,5 @@
     "contractfault-viewer": "dist/cli.js"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test --import tsx test/viewer.test.ts",
