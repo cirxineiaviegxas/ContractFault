@@ -116,3 +116,23 @@ actually depends on, so impacts can be attributed precisely.
   "team": "storefront",
   "criticality": "high",
   "uses": [
+    {
+      "endpoint": "createOrder",
+      "writesFields": ["CreateOrderRequest.items"],
+      "readsFields": ["Order.id", "Order.total"],
+      "params": ["query:status"]
+    }
+  ]
+}
+```
+
+| Field         | Type            | Meaning                                                             |
+|---------------|-----------------|---------------------------------------------------------------------|
+| `name`        | string          | Consumer service name (unique across the manifest set).             |
+| `team`        | string          | Owning team, surfaced for routing.                                  |
+| `criticality` | string          | `low`, `medium`, or `high` — weights the magnitude score (1/2/3).   |
+| `uses`        | array of `Usage`| Dependency edges into the contract.                                 |
+
+### 2.1 Usage
+
+| Field          | Type            | Meaning                                                       |
