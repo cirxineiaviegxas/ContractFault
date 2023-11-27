@@ -124,3 +124,16 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 			case analyze.Additive:
 				a.additive++
 			case analyze.Behavioral:
+				a.behavioral++
+			}
+			a.codes[ch.Code] = true
+			contribution := base * float64(a.m.CriticalityWeight())
+			a.score += contribution
+			magnitude += contribution
+		}
+	}
+
+	// Materialize consumer rollups in stable order.
+	affectedCount := 0
+	for _, name := range order {
+		a := accs[name]
