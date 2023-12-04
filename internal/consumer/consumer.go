@@ -73,3 +73,14 @@ func (m *Manifest) Validate() error {
 	}
 	if strings.TrimSpace(m.Criticality) == "" {
 		m.Criticality = "low"
+	}
+	return nil
+}
+
+// UsesEndpoint reports whether the consumer calls the given endpoint ID.
+func (m Manifest) UsesEndpoint(id string) bool {
+	for _, u := range m.Uses {
+		if u.Endpoint == id {
+			return true
+		}
+	}
