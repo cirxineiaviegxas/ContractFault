@@ -9,3 +9,4 @@
     "declaration": true,
     "strict": true,
     "noImplicitOverride": true,
+    "noUnusedLocals": true,
