@@ -20,3 +20,5 @@
         <animate attributeName="r" values="19.6;23.6;19.6" dur="2.99s" repeatCount="indefinite" />
       </circle>
       <text x="260.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">analytics-etl</text>
+      <text x="260.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">18.5</text>
+    </g>
