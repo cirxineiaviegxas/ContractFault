@@ -122,3 +122,21 @@ func (c *Contract) Validate() error {
 		return fmt.Errorf("contract: version is empty")
 	}
 	seen := make(map[string]bool)
+	for _, e := range c.Endpoints {
+		if e.ID == "" {
+			return fmt.Errorf("contract: endpoint with empty id (path %q)", e.Path)
+		}
+		if seen[e.ID] {
+			return fmt.Errorf("contract: duplicate endpoint id %q", e.ID)
+		}
+		seen[e.ID] = true
+		if e.Method == "" {
+			return fmt.Errorf("contract: endpoint %q has empty method", e.ID)
+		}
+		if e.RequestType != "" && !c.knownType(e.RequestType) {
+			return fmt.Errorf("contract: endpoint %q references unknown request type %q", e.ID, e.RequestType)
+		}
+		for code, ref := range e.Responses {
+			if ref != "" && !c.knownType(ref) {
+				return fmt.Errorf("contract: endpoint %q response %s references unknown type %q", e.ID, code, ref)
+			}
