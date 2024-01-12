@@ -4,3 +4,4 @@
   "criticality": "low",
   "uses": [
     {
+      "endpoint": "getReceipt",
