@@ -78,3 +78,12 @@ func categoryMarker(cat analyze.Category) string {
 		return "~~"
 	default:
 		return "++"
+	}
+}
+
+// seismograph draws a small ascii magnitude bar on a 0-10 scale.
+func seismograph(mag float64) string {
+	const width = 40
+	filled := int((mag / 10.0) * float64(width))
+	if filled > width {
+		filled = width
