@@ -9,3 +9,4 @@
       "readsFields": ["Order.id", "Order.total", "Order.status", "Money.amount", "Money.currency"]
     },
     {
+      "endpoint": "getReceipt",
