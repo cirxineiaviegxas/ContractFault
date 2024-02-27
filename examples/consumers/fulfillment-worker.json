@@ -8,3 +8,4 @@
       "params": ["query:status"],
       "readsFields": ["Order.id", "Order.status", "Order.items"]
     },
+    {
