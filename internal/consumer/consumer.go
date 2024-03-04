@@ -84,3 +84,14 @@ func (m Manifest) UsesEndpoint(id string) bool {
 			return true
 		}
 	}
+	return false
+}
+
+// FieldPaths returns the union of read and write field paths across all usages.
+func (m Manifest) FieldPaths() map[string]bool {
+	out := map[string]bool{}
+	for _, u := range m.Uses {
+		for _, f := range u.ReadsFields {
+			out[f] = true
+		}
+		for _, f := range u.WritesFields {
