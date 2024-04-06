@@ -137,3 +137,15 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 	affectedCount := 0
 	for _, name := range order {
 		a := accs[name]
+		total := a.breaking + a.additive + a.behavioral
+		if total > 0 {
+			affectedCount++
+		}
+		codes := make([]string, 0, len(a.codes))
+		for c := range a.codes {
+			codes = append(codes, c)
+		}
+		sort.Strings(codes)
+		r.Consumers = append(r.Consumers, ConsumerImpact{
+			Name:        a.m.Name,
+			Team:        a.m.Team,
