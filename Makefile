@@ -34,3 +34,7 @@ test: test-go test-viewer
 test-go:
 	$(GO) test ./...
 
+test-viewer:
+	cd $(VIEWER) && $(NPM) test
+
+## report: analyze the example contracts and emit deterministic JSON.
