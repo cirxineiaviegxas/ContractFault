@@ -47,3 +47,9 @@ export function exitCodeFor(report: ReturnType<typeof parseReport>): number {
   return 0;
 }
 
+function main(argv: string[]): number {
+  let args: Args;
+  try {
+    args = parseArgs(argv);
+  } catch (err) {
+    process.stderr.write(`contractfault-viewer: ${(err as Error).message}\n`);
