@@ -269,3 +269,42 @@ func (d *Diff) diffParams(oe, ne contract.Endpoint) {
 				Location:  ne.ID + "#" + k,
 				Endpoint:  ne.ID,
 				ParamKey:  k,
+				Detail:    fmt.Sprintf("parameter %s became optional", k),
+				Migration: "No action required; the parameter is now optional.",
+			})
+		}
+		if removed := removedEnum(op.Enum, np.Enum); len(removed) > 0 {
+			d.add(Change{
+				Code:      "param.enum.removed",
+				Category:  Breaking,
+				Severity:  Major.String(),
+				Location:  ne.ID + "#" + k,
+				Endpoint:  ne.ID,
+				ParamKey:  k,
+				Detail:    fmt.Sprintf("parameter %s dropped enum values %s", k, strings.Join(removed, ",")),
+				Migration: "Stop sending the removed values; choose a still-valid option.",
+			})
+		}
+	}
+	for k, np := range newP {
+		if _, ok := oldP[k]; ok {
+			continue
+		}
+		cat, sev := Additive, Info
+		mig := "Optional parameter added; adopt when useful."
+		if np.Required {
+			cat, sev = Breaking, Major
+			mig = fmt.Sprintf("A required parameter %s was added; all callers must supply it.", np.Name)
+		}
+		d.add(Change{
+			Code:      "param.added",
+			Category:  cat,
+			Severity:  sev.String(),
+			Location:  ne.ID + "#" + k,
+			Endpoint:  ne.ID,
+			ParamKey:  k,
+			Detail:    fmt.Sprintf("parameter %s added (required=%v)", k, np.Required),
+			Migration: mig,
+		})
+	}
+}
