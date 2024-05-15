@@ -164,3 +164,14 @@ func parseFlags(args []string, errw *os.File) (*options, error) {
 // resolveConsumerPaths expands a spec that may be a glob, a comma-separated
 // list, or a mix, into a sorted, de-duplicated list of manifest file paths.
 func resolveConsumerPaths(spec string) ([]string, error) {
+	if strings.TrimSpace(spec) == "" {
+		return nil, nil
+	}
+	set := map[string]bool{}
+	for _, part := range strings.Split(spec, ",") {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		matches, err := filepath.Glob(part)
+		if err != nil {
