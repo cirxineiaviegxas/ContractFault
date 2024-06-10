@@ -42,3 +42,8 @@ export interface ConsumerImpact {
 }
 
 export interface Report {
+  schema: string;
+  service: string;
+  fromVersion: string;
+  toVersion: string;
+  summary: Summary;
