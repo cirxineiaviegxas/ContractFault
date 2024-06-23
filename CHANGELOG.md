@@ -10,3 +10,5 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Go stdlib CLI `contractfault` that ingests two versions of a documented JSON
   contract plus consumer usage manifests and emits deterministic JSON/text
+  seismic reports with CI exit codes (0 stable, 1 shaken, 2 rupture, 3 usage).
+- Change classification engine covering endpoints, parameters, responses,
