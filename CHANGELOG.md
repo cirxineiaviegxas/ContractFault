@@ -12,3 +12,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   contract plus consumer usage manifests and emits deterministic JSON/text
   seismic reports with CI exit codes (0 stable, 1 shaken, 2 rupture, 3 usage).
 - Change classification engine covering endpoints, parameters, responses,
+  reusable types, fields, enums, nullability, arity, required-ness,
+  deprecation and idempotency — each mapped to breaking / additive / behavioral.
+- Consumer blast-radius join: every change is attributed to the named consumers
