@@ -4,3 +4,4 @@
 *.out
 
 # Node / TypeScript
+viewer/node_modules/
