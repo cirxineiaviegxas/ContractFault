@@ -15,3 +15,5 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   reusable types, fields, enums, nullability, arity, required-ness,
   deprecation and idempotency — each mapped to breaking / additive / behavioral.
 - Consumer blast-radius join: every change is attributed to the named consumers
+  that actually depend on the affected element, weighted by criticality.
+- Seismic magnitude scoring on a compressed 0–10 scale with a plain-language
