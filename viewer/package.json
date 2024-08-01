@@ -10,3 +10,4 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --test --import tsx test/viewer.test.ts",
+    "demo": "node --import tsx src/cli.ts ../examples/report.json"
