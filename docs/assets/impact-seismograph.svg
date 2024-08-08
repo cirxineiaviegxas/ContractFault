@@ -22,3 +22,5 @@
       <text x="260.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">analytics-etl</text>
       <text x="260.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">18.5</text>
     </g>
+    <g>
+      <circle cx="460.0" cy="210" r="12.1" fill="#e5484d" fill-opacity="0.85">
