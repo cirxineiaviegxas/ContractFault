@@ -162,3 +162,16 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 			return r.Consumers[i].Score > r.Consumers[j].Score
 		}
 		return r.Consumers[i].Name < r.Consumers[j].Name
+	})
+
+	counts := diff.Counts()
+	r.Summary = Summary{
+		Breaking:          counts[analyze.Breaking],
+		Additive:          counts[analyze.Additive],
+		Behavioral:        counts[analyze.Behavioral],
+		AffectedConsumers: affectedCount,
+		Magnitude:         magnitudeScale(magnitude),
+	}
+	r.Summary.Verdict = verdict(r.Summary)
+	return r
+}
