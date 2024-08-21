@@ -64,3 +64,10 @@
       ],
       "responses": { "200": "Order", "400": "Error" }
     },
+    {
+      "id": "getOrder",
+      "method": "GET",
+      "path": "/orders/{id}",
+      "idempotent": true,
+      "params": [
+        { "name": "id", "in": "path", "type": "string", "required": true }
