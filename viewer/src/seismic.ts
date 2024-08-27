@@ -111,3 +111,19 @@ function renderConsumerLine(cons: ConsumerImpact, color: boolean): string {
   const barColor = cons.breaking > 0 ? RED : cons.behavioral > 0 ? YELLOW : GREEN;
   return (
     `  ${name} ${paint(bar, barColor, color)} ` +
+    `${paint("score " + cons.score.toFixed(1), BOLD, color)} ` +
+    `(b:${cons.breaking} a:${cons.additive} v:${cons.behavioral}) ` +
+    `${paint(cons.criticality, DIM, color)}`
+  );
+}
+
+const SVG_COLORS: Record<string, string> = {
+  breaking: "#e5484d",
+  behavioral: "#f5a623",
+  additive: "#30a46c",
+  quiet: "#6b7280",
+};
+
+/**
+ * renderSvg produces a standalone impact seismograph as an SVG string. Each
+ * consumer is a station plotted left-to-right by descending score; its dot
