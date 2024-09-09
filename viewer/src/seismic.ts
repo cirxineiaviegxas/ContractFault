@@ -127,3 +127,19 @@ const SVG_COLORS: Record<string, string> = {
 /**
  * renderSvg produces a standalone impact seismograph as an SVG string. Each
  * consumer is a station plotted left-to-right by descending score; its dot
+ * radius encodes the score and its color encodes the worst category it saw.
+ * A dashed fault line runs through the stations and the magnitude is printed
+ * as a header. The output embeds no remote references.
+ */
+export function renderSvg(report: Report): string {
+  const width = 720;
+  const height = 360;
+  const consumers = report.consumers;
+  const maxScore = Math.max(1, ...consumers.map((x) => x.score));
+  const marginX = 60;
+  const usable = width - marginX * 2;
+  const step = consumers.length > 1 ? usable / (consumers.length - 1) : 0;
+  const faultY = 210;
+
+  const stations = consumers
+    .map((cons, i) => {
