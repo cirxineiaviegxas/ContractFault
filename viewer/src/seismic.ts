@@ -143,3 +143,19 @@ export function renderSvg(report: Report): string {
 
   const stations = consumers
     .map((cons, i) => {
+      const x = marginX + (consumers.length > 1 ? step * i : usable / 2);
+      const total = cons.breaking + cons.additive + cons.behavioral;
+      const worst =
+        cons.breaking > 0 ? "breaking" : cons.behavioral > 0 ? "behavioral" : total > 0 ? "additive" : "quiet";
+      const color = SVG_COLORS[worst];
+      const r = 6 + (cons.score / maxScore) * 26;
+      const amp = 8 + (cons.score / maxScore) * 60;
+      return { cons, x, color, r, amp };
+    });
+
+  // Build a seismograph trace: a jagged polyline whose spike heights follow
+  // each station's amplitude, giving the "impact seismograph" its shape.
+  const tracePoints: string[] = [];
+  tracePoints.push(`${marginX - 40},${faultY}`);
+  for (const st of stations) {
+    tracePoints.push(`${(st.x - 14).toFixed(1)},${faultY}`);
