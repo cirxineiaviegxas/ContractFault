@@ -40,3 +40,8 @@ func TestEndpointChangeHitsAllCallers(t *testing.T) {
 	r := Build(d, consumers)
 	if len(r.Changes[0].Consumers) != 1 || r.Changes[0].Consumers[0] != "a" {
 		t.Fatalf("expected only a, got %v", r.Changes[0].Consumers)
+	}
+	if r.Summary.AffectedConsumers != 1 {
+		t.Fatalf("affected consumers = %d", r.Summary.AffectedConsumers)
+	}
+}
