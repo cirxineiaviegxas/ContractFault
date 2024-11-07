@@ -87,3 +87,12 @@ func seismograph(mag float64) string {
 	filled := int((mag / 10.0) * float64(width))
 	if filled > width {
 		filled = width
+	}
+	if filled < 0 {
+		filled = 0
+	}
+	return "[" + strings.Repeat("#", filled) + strings.Repeat("-", width-filled) + "]"
+}
+
+// ExitCode maps a report to a CI exit code:
+//
