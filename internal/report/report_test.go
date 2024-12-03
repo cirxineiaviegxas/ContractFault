@@ -38,3 +38,8 @@ func TestExitCodeFailOnBehavioral(t *testing.T) {
 
 func TestJSONIsValidAndDeterministic(t *testing.T) {
 	r := &impact.Report{Schema: "contractfault/v1", Service: "svc",
+		Summary: impact.Summary{Magnitude: 5.5, Verdict: "shaken"}}
+	a, err := JSON(r)
+	if err != nil {
+		t.Fatal(err)
+	}
