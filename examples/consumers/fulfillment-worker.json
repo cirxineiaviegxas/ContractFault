@@ -11,3 +11,4 @@
     {
       "endpoint": "getOrder",
       "readsFields": ["Order.id", "Order.status", "Order.items", "LineItem.sku", "LineItem.qty"]
+    }
