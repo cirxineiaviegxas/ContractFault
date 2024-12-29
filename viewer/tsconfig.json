@@ -14,3 +14,4 @@
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": false,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
