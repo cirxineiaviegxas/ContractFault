@@ -386,3 +386,41 @@ func (d *Diff) diffTypes(oldC, newC *contract.Contract) {
 
 // diffTypePair classifies differences within a correlated type.
 func (d *Diff) diffTypePair(ot, nt contract.Type) {
+	name := nt.Name
+	if ot.Kind != nt.Kind {
+		d.add(Change{
+			Code:      "type.kind.changed",
+			Category:  Breaking,
+			Severity:  Critical.String(),
+			Location:  name,
+			Detail:    fmt.Sprintf("type %s kind changed %s -> %s", name, ot.Kind, nt.Kind),
+			Migration: "This type's fundamental shape changed; rewrite all usages.",
+		})
+	}
+	if removed := removedEnum(ot.Enum, nt.Enum); len(removed) > 0 {
+		d.add(Change{
+			Code:      "type.enum.removed",
+			Category:  Breaking,
+			Severity:  Major.String(),
+			Location:  name,
+			Detail:    fmt.Sprintf("type %s dropped enum values %s", name, strings.Join(removed, ",")),
+			Migration: "Handle the removed enum values as invalid; they will no longer be produced.",
+		})
+	}
+	if added := removedEnum(nt.Enum, ot.Enum); len(added) > 0 {
+		d.add(Change{
+			Code:      "type.enum.added",
+			Category:  Behavioral,
+			Severity:  Minor.String(),
+			Location:  name,
+			Detail:    fmt.Sprintf("type %s gained enum values %s", name, strings.Join(added, ",")),
+			Migration: "Ensure consumers tolerate the new enum values.",
+		})
+	}
+	for fname, of := range ot.Fields {
+		path := name + "." + fname
+		nf, ok := nt.Fields[fname]
+		if !ok {
+			d.add(Change{
+				Code:      "field.removed",
+				Category:  Breaking,
