@@ -53,3 +53,9 @@ function main(argv: string[]): number {
     args = parseArgs(argv);
   } catch (err) {
     process.stderr.write(`contractfault-viewer: ${(err as Error).message}\n`);
+    return 3;
+  }
+
+  let report;
+  try {
+    const raw = readFileSync(args.input, "utf8");
