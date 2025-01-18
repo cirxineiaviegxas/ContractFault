@@ -45,3 +45,7 @@ func TestEndpointChangeHitsAllCallers(t *testing.T) {
 		t.Fatalf("affected consumers = %d", r.Summary.AffectedConsumers)
 	}
 }
+
+func TestMagnitudeScaleBounded(t *testing.T) {
+	if m := magnitudeScale(0); m != 0 {
+		t.Fatalf("zero raw should give 0, got %v", m)
