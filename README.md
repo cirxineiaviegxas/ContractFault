@@ -214,3 +214,27 @@ tool understands the **semantics** of a contract, not its bytes.
 |----------------|-----------------|-------------------------------------------------------|----|
 | **breaking**   | the ground cracks | endpoint removed, method flip, required field added, enum value dropped, response type changed | exit 2 |
 | **behavioral** | the ground shifts | idempotency flip, field became nullable, enum value *added*, field deprecated | exit 1 |
+| **additive**   | the ground settles | new optional field, new endpoint, new status code, parameter relaxed to optional | exit 0 |
+
+The subtle cases are where the design earns its keep:
+
+- **A required field added is breaking; an optional one is additive.** Same JSON
+  edit, opposite blast radius.
+- **Adding an enum value is *behavioral*, not additive** — old consumers with an
+  exhaustive `switch` may fall through on the new value.
+- **An idempotency flip is behavioral even though the shape is byte-identical** —
+  it silently invalidates retry logic. A text differ would never catch this.
+- **A parameter *addition* shakes every caller of the endpoint**, but a
+  parameter *value* change only shakes consumers that set that specific param.
+
+The complete rule table (thirty-plus codes) lives in
+[`docs/CONTRACT.md`](docs/CONTRACT.md#33-rule-table).
+
+---
+
+## How the blast radius is computed
+
+A tremor with no town on top of it is a curiosity, not an incident.
+contractfault only counts a change against a consumer when that consumer
+actually depends on the affected element:
+
