@@ -156,3 +156,22 @@ the seismic magnitude.
 - **behavioral** — same shape, different runtime semantics (exit code 1).
 - **additive** — extends the surface without breaking callers (exit code 0).
 
+### 3.2 Severities
+
+`critical` > `major` > `minor` > `info`, with magnitude weights
+`4.0 / 2.5 / 1.0 / 0.25`.
+
+### 3.3 Rule table
+
+| Code                            | Category    | Severity | Trigger                                              |
+|---------------------------------|-------------|----------|------------------------------------------------------|
+| `endpoint.removed`              | breaking    | critical | An operation id disappears.                          |
+| `endpoint.method.changed`       | breaking    | critical | HTTP verb changes for an id.                         |
+| `endpoint.path.changed`         | breaking    | major    | Templated path changes for an id.                    |
+| `endpoint.requestType.changed`  | breaking    | major    | Request body type changes.                           |
+| `endpoint.added`                | additive    | info     | A new operation id appears.                          |
+| `endpoint.deprecated`           | behavioral  | minor    | Operation newly marked deprecated.                   |
+| `endpoint.idempotency.changed`  | behavioral  | major    | Idempotency flag flips.                              |
+| `param.added` (required)        | breaking    | major    | A new required parameter.                            |
+| `param.added` (optional)        | additive    | info     | A new optional parameter.                            |
+| `param.removed` (was required)  | breaking    | major    | A required parameter is dropped.                     |
