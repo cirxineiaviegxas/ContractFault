@@ -34,3 +34,6 @@ jobs:
 
   viewer:
     name: TypeScript viewer
+    runs-on: ubuntu-latest
+    defaults:
+      run:
