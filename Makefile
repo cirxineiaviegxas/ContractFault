@@ -38,3 +38,7 @@ test-viewer:
 	cd $(VIEWER) && $(NPM) test
 
 ## report: analyze the example contracts and emit deterministic JSON.
+report: build-go
+	$(BIN) -old $(OLD) -new $(NEW) -consumers "$(CONSUMERS)" -format json -out $(REPORT)
+
+## demo: full pipeline — analyze then render the seismic map + SVG.
