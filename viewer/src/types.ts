@@ -47,3 +47,9 @@ export interface Report {
   fromVersion: string;
   toVersion: string;
   summary: Summary;
+  changes: ChangeImpact[];
+  consumers: ConsumerImpact[];
+}
+
+export const SCHEMA_ID = "contractfault/v1";
+
