@@ -157,3 +157,21 @@ func (c *Contract) knownType(ref string) bool {
 	case "string", "integer", "number", "boolean", "object":
 		return true
 	}
+	_, ok := c.Types[ref]
+	return ok
+}
+
+// SortedTypeNames returns type names in deterministic order.
+func (c *Contract) SortedTypeNames() []string {
+	names := make([]string, 0, len(c.Types))
+	for n := range c.Types {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	return names
+}
+
+// Load reads and parses a contract from a JSON file at path, normalizes it and
+// validates it. Any error is wrapped with the source path for diagnosability.
+func Load(path string) (*Contract, error) {
+	raw, err := os.ReadFile(path)
