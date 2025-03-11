@@ -26,3 +26,7 @@
         fill="#1c2128" stroke="#30363d" stroke-width="1">
     <animateTransform attributeName="transform" type="translate"
                       values="0 0; 0 3; 0 0" dur="4s" repeatCount="indefinite" />
+  </path>
+
+  <rect x="0" y="146" width="900" height="8" fill="url(#rift)">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" repeatCount="indefinite" />
