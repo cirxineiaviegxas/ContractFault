@@ -13,3 +13,4 @@
     "demo": "node --import tsx src/cli.ts ../examples/report.json"
   },
   "devDependencies": {
+    "@types/node": "20.14.10",
