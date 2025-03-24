@@ -42,3 +42,7 @@ report: build-go
 	$(BIN) -old $(OLD) -new $(NEW) -consumers "$(CONSUMERS)" -format json -out $(REPORT)
 
 ## demo: full pipeline — analyze then render the seismic map + SVG.
+demo: report build-viewer svg
+	cd $(VIEWER) && node dist/cli.js ../$(REPORT)
+
+## svg: regenerate the impact seismograph from the current report.
