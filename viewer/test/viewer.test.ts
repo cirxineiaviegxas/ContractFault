@@ -94,3 +94,15 @@ test("renderTerminal without color contains key facts and no escapes", () => {
   assert.match(out, /RUPTURE/);
   assert.match(out, /analytics-etl/);
   assert.ok(!out.includes("\x1b["), "expected no ANSI escapes when color disabled");
+});
+
+test("renderTerminal with color emits ANSI escapes", () => {
+  const out = renderTerminal(sample(), { color: true });
+  assert.ok(out.includes("\x1b["), "expected ANSI escapes when color enabled");
+});
+
+test("renderSvg produces valid standalone SVG with a station per consumer", () => {
+  const svg = renderSvg(sample());
+  assert.match(svg, /^<\?xml/);
+  assert.match(svg, /<svg[^>]+width="720"/);
+  assert.match(svg, /analytics-etl/);
