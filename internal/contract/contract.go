@@ -175,3 +175,21 @@ func (c *Contract) SortedTypeNames() []string {
 // validates it. Any error is wrapped with the source path for diagnosability.
 func Load(path string) (*Contract, error) {
 	raw, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("contract: reading %s: %w", path, err)
+	}
+	return Parse(raw, path)
+}
+
+// Parse decodes a contract from raw JSON bytes. The origin string is only used
+// to enrich error messages.
+func Parse(raw []byte, origin string) (*Contract, error) {
+	var c Contract
+	dec := json.NewDecoder(strings.NewReader(string(raw)))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&c); err != nil {
+		return nil, fmt.Errorf("contract: decoding %s: %w", origin, err)
+	}
+	c.normalize()
+	if err := c.Validate(); err != nil {
+		return nil, err
