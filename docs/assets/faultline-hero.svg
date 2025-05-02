@@ -30,3 +30,7 @@
 
   <rect x="0" y="146" width="900" height="8" fill="url(#rift)">
     <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" repeatCount="indefinite" />
+  </rect>
+
+  <polyline fill="none" stroke="#58a6ff" stroke-width="2"
+            points="0,150 90,150 120,110 150,190 180,150 300,150 330,96 360,206 390,150 520,150 555,120 585,182 615,150 760,150 795,104 825,196 855,150 900,150">
