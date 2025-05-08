@@ -155,3 +155,25 @@
       "detail": "field Money.display added (required=false)",
       "migration": "New optional field; read it when useful.",
       "consumers": [
+        "receipts-mailer"
+      ]
+    },
+    {
+      "code": "param.added",
+      "category": "additive",
+      "severity": "info",
+      "location": "listOrders#query:cursor",
+      "endpoint": "listOrders",
+      "paramKey": "query:cursor",
+      "detail": "parameter query:cursor added (required=false)",
+      "migration": "Optional parameter added; adopt when useful.",
+      "consumers": [
+        "analytics-etl",
+        "fulfillment-worker"
+      ]
+    },
+    {
+      "code": "response.added",
+      "category": "additive",
+      "severity": "info",
+      "location": "createOrder#422",
