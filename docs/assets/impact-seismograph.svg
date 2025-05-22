@@ -24,3 +24,5 @@
     </g>
     <g>
       <circle cx="460.0" cy="210" r="12.1" fill="#e5484d" fill-opacity="0.85">
+        <animate attributeName="r" values="12.1;16.1;12.1" dur="2.55s" repeatCount="indefinite" />
+      </circle>
