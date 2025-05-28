@@ -43,3 +43,8 @@ func TestJSONIsValidAndDeterministic(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	b, _ := JSON(r)
+	if string(a) != string(b) {
+		t.Fatal("JSON output not deterministic")
+	}
+	var back impact.Report
