@@ -175,3 +175,15 @@ func Build(diff *analyze.Diff, consumers []consumer.Manifest) *Report {
 	r.Summary.Verdict = verdict(r.Summary)
 	return r
 }
+
+// affectedConsumers returns the sorted names of consumers impacted by a change.
+func affectedConsumers(ch analyze.Change, consumers []consumer.Manifest) []string {
+	// Always non-nil so the JSON report renders "consumers": [] rather than
+	// null, which keeps the TypeScript viewer's array handling simple.
+	out := []string{}
+	for _, m := range consumers {
+		if consumerAffected(ch, m) {
+			out = append(out, m.Name)
+		}
+	}
+	sort.Strings(out)
