@@ -40,3 +40,9 @@ func TestResolveConsumerPathsEmpty(t *testing.T) {
 // TestRunEndToEnd exercises the whole pipeline against the shipped examples and
 // asserts the rupture exit code.
 func TestRunEndToEnd(t *testing.T) {
+	base := filepath.Join("..", "..", "examples")
+	oldC := filepath.Join(base, "contracts", "orders-v1.json")
+	newC := filepath.Join(base, "contracts", "orders-v2.json")
+	glob := filepath.Join(base, "consumers", "*.json")
+	out := filepath.Join(t.TempDir(), "out.json")
+
