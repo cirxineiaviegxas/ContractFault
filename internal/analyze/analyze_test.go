@@ -132,3 +132,17 @@ func TestSortDeterministicBySeverity(t *testing.T) {
 	oldT := map[string]contract.Type{"T": {Kind: "object", Fields: map[string]contract.Field{
 		"keep": {TypeRef: "string"},
 	}}}
+	newT := map[string]contract.Type{"T": {Kind: "object", Fields: map[string]contract.Field{
+		"keep": {TypeRef: "string"}, "opt": {TypeRef: "string"},
+	}}}
+	oldC := build("1", oldT, contract.Endpoint{ID: "z", Method: "GET", Path: "/z"})
+	newC := build("2", newT)
+	d, _ := Compare(oldC, newC)
+	// The critical endpoint removal must sort before the info field addition.
+	if len(d.Changes) < 2 {
+		t.Fatalf("expected multiple changes, got %d", len(d.Changes))
+	}
+	if severityRank(d.Changes[0].Severity) < severityRank(d.Changes[len(d.Changes)-1].Severity) {
+		t.Fatal("changes not sorted by severity descending")
+	}
+}
