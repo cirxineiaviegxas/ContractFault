@@ -238,3 +238,27 @@ A tremor with no town on top of it is a curiosity, not an incident.
 contractfault only counts a change against a consumer when that consumer
 actually depends on the affected element:
 
+- **Field tremor** (`Order.couponCode`) → only consumers whose manifest lists
+  that field in `readsFields`/`writesFields`.
+- **Type tremor** (`OrderStatus`) → consumers referencing any field of that type.
+- **Endpoint tremor** (`getReceipt` removed) → every consumer that calls it.
+- **New required parameter** → every caller of the endpoint, because they all
+  suddenly send an incomplete request.
+
+Each surviving (tremor, town) pair releases energy equal to
+`severityWeight × criticalityWeight`. A `high`-criticality consumer amplifies a
+critical break to `4.0 × 3 = 12.0`; a `low`-criticality consumer feeling the
+same break releases only `4.0 × 1 = 4.0`. The town's construction quality
+matters as much as the quake.
+
+The raw energy is then compressed onto a Richter-like 0–10 dial:
+
+```
+magnitude = 10 · (1 − 1 / (1 + raw / 12))
+```
+
+so a fistful of critical breaks dominates the reading while an avalanche of
+harmless `info` changes never saturates the meter.
+
+---
+
