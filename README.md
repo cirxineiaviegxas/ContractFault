@@ -262,3 +262,27 @@ harmless `info` changes never saturates the meter.
 
 ---
 
+## The contract format in 30 seconds
+
+A contract is OpenAPI-like but self-contained. Endpoints are correlated across
+versions by a stable `id`, so renaming a path is reported as a *mutation*, not a
+delete-plus-add.
+
+```json
+{
+  "service": "orders-api",
+  "version": "1.4.0",
+  "types": {
+    "OrderStatus": { "kind": "string", "enum": ["pending", "paid", "shipped"] },
+    "Order": {
+      "kind": "object",
+      "fields": {
+        "id":     { "type": "string", "required": true },
+        "status": { "type": "OrderStatus", "required": true },
+        "note":   { "type": "string", "nullable": true }
+      }
+    }
+  },
+  "endpoints": [
+    {
+      "id": "getOrder", "method": "GET", "path": "/orders/{id}", "idempotent": true,
