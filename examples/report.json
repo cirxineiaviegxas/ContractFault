@@ -177,3 +177,26 @@
       "category": "additive",
       "severity": "info",
       "location": "createOrder#422",
+      "endpoint": "createOrder",
+      "detail": "response 422 (Error) added",
+      "migration": "Optionally handle the new status code.",
+      "consumers": [
+        "checkout-web"
+      ]
+    }
+  ],
+  "consumers": [
+    {
+      "name": "checkout-web",
+      "team": "storefront",
+      "criticality": "high",
+      "breaking": 3,
+      "additive": 1,
+      "behavioral": 1,
+      "codes": [
+        "endpoint.idempotency.changed",
+        "endpoint.method.changed",
+        "endpoint.path.changed",
+        "field.removed",
+        "response.added"
+      ],
