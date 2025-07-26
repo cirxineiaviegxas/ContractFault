@@ -46,3 +46,11 @@ func TestValidateRejectsDuplicateEndpointID(t *testing.T) {
       "endpoints": [
         { "id": "x", "method": "GET", "path": "/a" },
         { "id": "x", "method": "GET", "path": "/b" }
+      ]
+    }`
+	_, err := Parse([]byte(dup), "test")
+	if err == nil || !strings.Contains(err.Error(), "duplicate endpoint id") {
+		t.Fatalf("expected duplicate id error, got %v", err)
+	}
+}
+
