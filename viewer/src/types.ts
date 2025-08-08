@@ -53,3 +53,8 @@ export interface Report {
 
 export const SCHEMA_ID = "contractfault/v1";
 
+/**
+ * parseReport validates that an unknown JSON value conforms to the expected
+ * report shape and schema, throwing a descriptive error otherwise. It performs
+ * structural checks rather than trusting the input, so malformed reports are
+ * rejected at the boundary instead of causing confusing failures later.
