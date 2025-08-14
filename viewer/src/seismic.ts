@@ -175,3 +175,19 @@ export function renderSvg(report: Report): string {
   const stationSvg = stations
     .map((st) => {
       const label = st.cons.name;
+      return `
+    <g>
+      <circle cx="${st.x.toFixed(1)}" cy="${faultY}" r="${st.r.toFixed(1)}" fill="${st.color}" fill-opacity="0.85">
+        <animate attributeName="r" values="${st.r.toFixed(1)};${(st.r + 4).toFixed(1)};${st.r.toFixed(1)}" dur="${(2 + st.amp / 40).toFixed(2)}s" repeatCount="indefinite" />
+      </circle>
+      <text x="${st.x.toFixed(1)}" y="${faultY + 34}" text-anchor="middle" font-size="12" fill="#c9d1d9">${escapeXml(label)}</text>
+      <text x="${st.x.toFixed(1)}" y="${faultY + 50}" text-anchor="middle" font-size="10" fill="#8b949e">${st.cons.score.toFixed(1)}</text>
+    </g>`;
+    })
+    .join("");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="contractfault impact seismograph for ${escapeXml(report.service)}">
+  <rect width="${width}" height="${height}" fill="#0d1117" />
+  <text x="${marginX - 40}" y="48" font-size="22" font-family="monospace" fill="#c9d1d9">${escapeXml(report.service)} ${escapeXml(report.fromVersion)} → ${escapeXml(report.toVersion)}</text>
+  <text x="${marginX - 40}" y="78" font-size="16" font-family="monospace" fill="${verdictColor}">magnitude ${report.summary.magnitude.toFixed(1)} · ${report.summary.verdict.toUpperCase()}</text>
