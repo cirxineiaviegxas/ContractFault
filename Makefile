@@ -46,3 +46,7 @@ demo: report build-viewer svg
 	cd $(VIEWER) && node dist/cli.js ../$(REPORT)
 
 ## svg: regenerate the impact seismograph from the current report.
+svg: build-viewer report
+	cd $(VIEWER) && node dist/cli.js ../$(REPORT) --svg ../docs/assets/impact-seismograph.svg --no-color
+
+fmt:
