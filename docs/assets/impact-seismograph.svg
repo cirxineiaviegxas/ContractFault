@@ -26,3 +26,5 @@
       <circle cx="460.0" cy="210" r="12.1" fill="#e5484d" fill-opacity="0.85">
         <animate attributeName="r" values="12.1;16.1;12.1" dur="2.55s" repeatCount="indefinite" />
       </circle>
+      <text x="460.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">fulfillment-worker</text>
+      <text x="460.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">8.3</text>
