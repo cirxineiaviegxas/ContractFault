@@ -187,3 +187,16 @@ func affectedConsumers(ch analyze.Change, consumers []consumer.Manifest) []strin
 		}
 	}
 	sort.Strings(out)
+	return out
+}
+
+// consumerAffected reports whether a change touches something the consumer uses.
+func consumerAffected(ch analyze.Change, m consumer.Manifest) bool {
+	// Field-scoped changes only affect consumers that read/write that field.
+	if ch.FieldPath != "" {
+		return m.FieldPaths()[ch.FieldPath]
+	}
+	// Parameter-scoped changes only affect consumers that set that parameter,
+	// but a required-parameter addition affects every caller of the endpoint.
+	if ch.ParamKey != "" {
+		if ch.Code == "param.added" || ch.Code == "param.required.added" {
