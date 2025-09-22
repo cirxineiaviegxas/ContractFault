@@ -116,3 +116,14 @@ func (m Manifest) ParamKeys() map[string]bool {
 func Load(path string) (*Manifest, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
+		return nil, fmt.Errorf("consumer: reading %s: %w", path, err)
+	}
+	var m Manifest
+	dec := json.NewDecoder(strings.NewReader(string(raw)))
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&m); err != nil {
+		return nil, fmt.Errorf("consumer: decoding %s: %w", path, err)
+	}
+	if err := m.Validate(); err != nil {
+		return nil, err
+	}
