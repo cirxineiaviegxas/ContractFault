@@ -38,3 +38,6 @@ func TestFieldPathsUnion(t *testing.T) {
 	for _, want := range []string{"T.x", "T.y", "T.z"} {
 		if !fp[want] {
 			t.Errorf("missing field path %q", want)
+		}
+	}
+}
