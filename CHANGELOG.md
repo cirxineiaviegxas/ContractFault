@@ -17,3 +17,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Consumer blast-radius join: every change is attributed to the named consumers
   that actually depend on the affected element, weighted by criticality.
 - Seismic magnitude scoring on a compressed 0–10 scale with a plain-language
+  verdict (`stable`, `tremor`, `shaken`, `rupture`).
+- TypeScript seismic viewer that consumes the JSON report and renders both a
+  colorized terminal impact map and a standalone animated SVG seismograph.
