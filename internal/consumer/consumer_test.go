@@ -41,3 +41,6 @@ func TestFieldPathsUnion(t *testing.T) {
 		}
 	}
 }
+
+func TestUsesEndpoint(t *testing.T) {
+	m := Manifest{Uses: []Usage{{Endpoint: "getOrder"}}}
