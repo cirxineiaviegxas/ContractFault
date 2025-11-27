@@ -61,3 +61,9 @@
     },
     {
       "id": "getOrder",
+      "method": "GET",
+      "path": "/orders/{id}",
+      "idempotent": true,
+      "params": [
+        { "name": "id", "in": "path", "type": "string", "required": true }
+      ],
