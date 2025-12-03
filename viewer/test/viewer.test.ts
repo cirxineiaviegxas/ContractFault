@@ -118,3 +118,15 @@ test("renderSvg escapes XML special characters", () => {
   assert.ok(!svg.includes("a<b>&\"c"));
   assert.match(svg, /a&lt;b&gt;&amp;&quot;c/);
 });
+
+test("exitCodeFor maps summary to CI codes", () => {
+  assert.equal(exitCodeFor(sample()), 2);
+  assert.equal(exitCodeFor(sample({ summary: { ...sample().summary, breaking: 0 } })), 1);
+  assert.equal(
+    exitCodeFor(sample({ summary: { ...sample().summary, breaking: 0, behavioral: 0 } })),
+    0,
+  );
+});
+
+test("parseArgs parses input, svg and no-color", () => {
+  const a = parseArgs(["report.json", "--svg", "out.svg", "--no-color"]);
