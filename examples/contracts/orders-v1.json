@@ -67,3 +67,9 @@
       "params": [
         { "name": "id", "in": "path", "type": "string", "required": true }
       ],
+      "responses": { "200": "Order", "404": "Error" }
+    },
+    {
+      "id": "createOrder",
+      "method": "POST",
+      "path": "/orders",
