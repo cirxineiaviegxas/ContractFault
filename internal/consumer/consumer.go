@@ -127,3 +127,14 @@ func Load(path string) (*Manifest, error) {
 	if err := m.Validate(); err != nil {
 		return nil, err
 	}
+	return &m, nil
+}
+
+// LoadAll parses every manifest at the given paths and returns them sorted by
+// name for deterministic downstream ordering.
+func LoadAll(paths []string) ([]Manifest, error) {
+	out := make([]Manifest, 0, len(paths))
+	seen := map[string]bool{}
+	for _, p := range paths {
+		m, err := Load(p)
+		if err != nil {
