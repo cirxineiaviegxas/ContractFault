@@ -502,3 +502,42 @@ func (d *Diff) diffFieldPair(path string, of, nf contract.Field) {
 			Detail:    fmt.Sprintf("field %s became optional", path),
 			Migration: fmt.Sprintf("Handle %s being absent; it may be omitted.", path),
 		})
+	}
+	if !of.Nullable && nf.Nullable {
+		d.add(Change{
+			Code:      "field.nullable.added",
+			Category:  Behavioral,
+			Severity:  Major.String(),
+			Location:  path,
+			FieldPath: path,
+			Detail:    fmt.Sprintf("field %s became nullable", path),
+			Migration: fmt.Sprintf("Guard against null values for %s.", path),
+		})
+	}
+	if of.Nullable && !nf.Nullable {
+		d.add(Change{
+			Code:      "field.nullable.removed",
+			Category:  Additive,
+			Severity:  Info.String(),
+			Location:  path,
+			FieldPath: path,
+			Detail:    fmt.Sprintf("field %s is no longer nullable", path),
+			Migration: "No action required; the field is guaranteed non-null.",
+		})
+	}
+	if !of.Deprecated && nf.Deprecated {
+		d.add(Change{
+			Code:      "field.deprecated",
+			Category:  Behavioral,
+			Severity:  Minor.String(),
+			Location:  path,
+			FieldPath: path,
+			Detail:    fmt.Sprintf("field %s marked deprecated", path),
+			Migration: fmt.Sprintf("Plan to stop using %s; it may be removed later.", path),
+		})
+	}
+}
+
+// removedEnum returns values present in a but absent from b, sorted.
+func removedEnum(a, b []string) []string {
+	set := map[string]bool{}
