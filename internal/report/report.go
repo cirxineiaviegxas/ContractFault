@@ -96,3 +96,12 @@ func seismograph(mag float64) string {
 
 // ExitCode maps a report to a CI exit code:
 //
+//	0 = stable (only additive changes, no consumers broken)
+//	1 = shaken (behavioral changes or additive breaks a consumer)
+//	2 = rupture (breaking changes present)
+//
+// The failOnBehavioral flag promotes behavioral-only shifts to a failure for
+// stricter pipelines.
+func ExitCode(r *impact.Report, failOnBehavioral bool) int {
+	if r.Summary.Breaking > 0 {
+		return 2
