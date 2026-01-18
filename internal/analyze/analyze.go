@@ -541,3 +541,42 @@ func (d *Diff) diffFieldPair(path string, of, nf contract.Field) {
 // removedEnum returns values present in a but absent from b, sorted.
 func removedEnum(a, b []string) []string {
 	set := map[string]bool{}
+	for _, v := range b {
+		set[v] = true
+	}
+	var out []string
+	for _, v := range a {
+		if !set[v] {
+			out = append(out, v)
+		}
+	}
+	sort.Strings(out)
+	return out
+}
+
+// sortChanges orders changes deterministically: by severity (desc), then
+// category, then code, then location.
+func (d *Diff) sortChanges() {
+	sort.SliceStable(d.Changes, func(i, j int) bool {
+		a, b := d.Changes[i], d.Changes[j]
+		if ra, rb := severityRank(a.Severity), severityRank(b.Severity); ra != rb {
+			return ra > rb
+		}
+		if a.Category != b.Category {
+			return a.Category < b.Category
+		}
+		if a.Code != b.Code {
+			return a.Code < b.Code
+		}
+		return a.Location < b.Location
+	})
+}
+
+// Counts summarizes changes by category.
+func (d *Diff) Counts() map[Category]int {
+	out := map[Category]int{Breaking: 0, Additive: 0, Behavioral: 0}
+	for _, c := range d.Changes {
+		out[c.Category]++
+	}
+	return out
+}
