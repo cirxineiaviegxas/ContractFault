@@ -58,3 +58,9 @@ export const SCHEMA_ID = "contractfault/v1";
  * report shape and schema, throwing a descriptive error otherwise. It performs
  * structural checks rather than trusting the input, so malformed reports are
  * rejected at the boundary instead of causing confusing failures later.
+ */
+export function parseReport(value: unknown): Report {
+  if (typeof value !== "object" || value === null) {
+    throw new Error("report: expected a JSON object");
+  }
+  const r = value as Record<string, unknown>;
