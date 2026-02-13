@@ -175,3 +175,13 @@ func resolveConsumerPaths(spec string) ([]string, error) {
 		}
 		matches, err := filepath.Glob(part)
 		if err != nil {
+			return nil, fmt.Errorf("bad consumer glob %q: %w", part, err)
+		}
+		if len(matches) == 0 {
+			// Treat as a literal path if it is not a glob pattern.
+			if !strings.ContainsAny(part, "*?[") {
+				set[part] = true
+				continue
+			}
+			return nil, fmt.Errorf("consumer glob %q matched no files", part)
+		}
