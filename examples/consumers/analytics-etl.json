@@ -13,3 +13,4 @@
       "readsFields": ["Order.id", "Order.total", "Order.couponCode"]
     }
   ]
+}
