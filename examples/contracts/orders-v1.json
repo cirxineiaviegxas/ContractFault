@@ -73,3 +73,10 @@
       "id": "createOrder",
       "method": "POST",
       "path": "/orders",
+      "idempotent": false,
+      "requestType": "CreateOrderRequest",
+      "responses": { "201": "Order", "400": "Error" }
+    },
+    {
+      "id": "cancelOrder",
+      "method": "POST",
