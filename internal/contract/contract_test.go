@@ -54,3 +54,11 @@ func TestValidateRejectsDuplicateEndpointID(t *testing.T) {
 	}
 }
 
+func TestParseRejectsUnknownFields(t *testing.T) {
+	extra := `{ "service": "svc", "version": "1.0.0", "types": {}, "endpoints": [], "bogus": 1 }`
+	if _, err := Parse([]byte(extra), "test"); err == nil {
+		t.Fatal("expected error on unknown field")
+	}
+}
+
+func TestSortedTypeNamesDeterministic(t *testing.T) {
