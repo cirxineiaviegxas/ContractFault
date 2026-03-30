@@ -138,3 +138,14 @@ func LoadAll(paths []string) ([]Manifest, error) {
 	for _, p := range paths {
 		m, err := Load(p)
 		if err != nil {
+			return nil, err
+		}
+		if seen[m.Name] {
+			return nil, fmt.Errorf("consumer: duplicate consumer name %q", m.Name)
+		}
+		seen[m.Name] = true
+		out = append(out, *m)
+	}
+	sort.Slice(out, func(i, j int) bool { return out[i].Name < out[j].Name })
+	return out, nil
+}
