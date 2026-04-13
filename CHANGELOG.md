@@ -20,3 +20,5 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   verdict (`stable`, `tremor`, `shaken`, `rupture`).
 - TypeScript seismic viewer that consumes the JSON report and renders both a
   colorized terminal impact map and a standalone animated SVG seismograph.
+- Example before/after contracts for `orders-api` (v1.4.0 → v2.0.0) and four
+  consumer manifests spanning low/medium/high criticality.
