@@ -22,3 +22,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   colorized terminal impact map and a standalone animated SVG seismograph.
 - Example before/after contracts for `orders-api` (v1.4.0 → v2.0.0) and four
   consumer manifests spanning low/medium/high criticality.
+- Documentation: `docs/CONTRACT.md` specifying the contract and manifest format
+  and the full classification table.
+- Hand-authored animated hero SVG and a generated impact seismograph SVG under
