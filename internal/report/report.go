@@ -105,3 +105,12 @@ func seismograph(mag float64) string {
 func ExitCode(r *impact.Report, failOnBehavioral bool) int {
 	if r.Summary.Breaking > 0 {
 		return 2
+	}
+	if failOnBehavioral && r.Summary.Behavioral > 0 {
+		return 2
+	}
+	if r.Summary.Behavioral > 0 {
+		return 1
+	}
+	return 0
+}
