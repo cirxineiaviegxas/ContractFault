@@ -175,3 +175,23 @@ the seismic magnitude.
 | `param.added` (required)        | breaking    | major    | A new required parameter.                            |
 | `param.added` (optional)        | additive    | info     | A new optional parameter.                            |
 | `param.removed` (was required)  | breaking    | major    | A required parameter is dropped.                     |
+| `param.removed` (was optional)  | additive    | minor    | An optional parameter is dropped.                    |
+| `param.required.added`          | breaking    | major    | Existing parameter becomes required.                 |
+| `param.required.relaxed`        | additive    | info     | Existing parameter becomes optional.                 |
+| `param.enum.removed`            | breaking    | major    | A parameter drops accepted enum values.              |
+| `response.removed`              | breaking    | major    | A documented status code disappears.                 |
+| `response.type.changed`         | breaking    | major    | A status code's body type changes.                   |
+| `response.added`                | additive    | info     | A new status code is documented.                     |
+| `type.removed`                  | breaking    | major    | A named type disappears.                             |
+| `type.kind.changed`             | breaking    | critical | A type's fundamental kind changes.                   |
+| `type.enum.removed`             | breaking    | major    | A scalar type drops enum values.                     |
+| `type.enum.added`               | behavioral  | minor    | A scalar type gains enum values.                     |
+| `type.added`                    | additive    | info     | A new named type appears.                            |
+| `field.removed`                 | breaking    | major    | A field disappears from a type.                      |
+| `field.added` (required)        | breaking    | major    | A new required field.                                |
+| `field.added` (optional)        | additive    | info     | A new optional field.                                |
+| `field.type.changed`            | breaking    | major    | A field's type changes.                              |
+| `field.arity.changed`           | breaking    | major    | A field flips between scalar and array.              |
+| `field.required.added`          | breaking    | major    | An existing field becomes required.                  |
+| `field.required.relaxed`        | behavioral  | minor    | An existing field becomes optional.                  |
+| `field.nullable.added`          | behavioral  | major    | A field becomes nullable.                            |
