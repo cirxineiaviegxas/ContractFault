@@ -195,3 +195,23 @@ the seismic magnitude.
 | `field.required.added`          | breaking    | major    | An existing field becomes required.                  |
 | `field.required.relaxed`        | behavioral  | minor    | An existing field becomes optional.                  |
 | `field.nullable.added`          | behavioral  | major    | A field becomes nullable.                            |
+| `field.nullable.removed`        | additive    | info     | A field is guaranteed non-null.                      |
+| `field.deprecated`              | behavioral  | minor    | A field newly marked deprecated.                     |
+
+### 3.4 Impact attribution rules
+
+- **Field-scoped** changes affect only consumers whose `readsFields` /
+  `writesFields` include that `Type.field` path.
+- **Type-scoped** changes (no field path) affect consumers that reference any
+  field of that type.
+- **Parameter-scoped** changes affect consumers that set that parameter —
+  except *adding* a parameter, which affects every caller of the endpoint.
+- **Endpoint-scoped** changes affect every consumer that calls the endpoint.
+
+---
+
+## 4. Magnitude & verdict
+
+Each impacted (change, consumer) pair contributes `severityWeight ×
+criticalityWeight` to a raw score. The raw score is compressed onto a 0–10
+Richter-like scale via `10 · (1 − 1/(1 + raw/12))`, so a handful of critical
