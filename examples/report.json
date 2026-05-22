@@ -200,3 +200,25 @@
         "field.removed",
         "response.added"
       ],
+      "score": 35.3
+    },
+    {
+      "name": "analytics-etl",
+      "team": "data-platform",
+      "criticality": "medium",
+      "breaking": 3,
+      "additive": 1,
+      "behavioral": 0,
+      "codes": [
+        "endpoint.removed",
+        "field.removed",
+        "param.added",
+        "param.required.added"
+      ],
+      "score": 18.5
+    },
+    {
+      "name": "fulfillment-worker",
+      "team": "logistics",
+      "criticality": "high",
+      "breaking": 1,
