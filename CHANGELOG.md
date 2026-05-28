@@ -25,3 +25,5 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Documentation: `docs/CONTRACT.md` specifying the contract and manifest format
   and the full classification table.
 - Hand-authored animated hero SVG and a generated impact seismograph SVG under
+  `docs/assets/`.
+- Test suites for every Go package and the TypeScript viewer.
