@@ -213,3 +213,15 @@ func consumerAffected(ch analyze.Change, m consumer.Manifest) bool {
 	}
 	// Type-scoped changes (no field path) affect consumers referencing any
 	// field of that type.
+	typeName := ch.Location
+	for path := range m.FieldPaths() {
+		if len(path) > len(typeName) && path[:len(typeName)] == typeName && path[len(typeName)] == '.' {
+			return true
+		}
+	}
+	return false
+}
+
+// magnitudeScale compresses the raw additive score into a 0-10 Richter-like
+// scale using a diminishing-returns curve so a handful of critical breaks
+// dominate without a long tail of info changes saturating the meter.
