@@ -286,3 +286,27 @@ delete-plus-add.
   "endpoints": [
     {
       "id": "getOrder", "method": "GET", "path": "/orders/{id}", "idempotent": true,
+      "params": [{ "name": "id", "in": "path", "type": "string", "required": true }],
+      "responses": { "200": "Order", "404": "Error" }
+    }
+  ]
+}
+```
+
+A consumer manifest declares only what it touches — coarse enough to publish
+without exposing your source tree, precise enough to compute a real blast radius:
+
+```json
+{
+  "name": "checkout-web",
+  "team": "storefront",
+  "criticality": "high",
+  "uses": [
+    { "endpoint": "getOrder", "readsFields": ["Order.id", "Order.status"] }
+  ]
+}
+```
+
+Both formats are decoded strictly — an unknown key is a hard error, so typos
+fail loudly instead of silently disarming a check. Full spec:
+[`docs/CONTRACT.md`](docs/CONTRACT.md).
