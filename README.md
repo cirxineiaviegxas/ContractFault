@@ -310,3 +310,27 @@ without exposing your source tree, precise enough to compute a real blast radius
 Both formats are decoded strictly — an unknown key is a hard error, so typos
 fail loudly instead of silently disarming a check. Full spec:
 [`docs/CONTRACT.md`](docs/CONTRACT.md).
+
+---
+
+## CLI reference
+
+```
+contractfault -old <before.json> -new <after.json> [flags]
+
+  -old string           previous contract version (required)
+  -new string           new contract version (required)
+  -consumers string     glob or comma-separated list of manifest paths
+  -format string        output format: text | json          (default "text")
+  -out string           write report to a file instead of stdout
+  -fail-on-behavioral   treat behavioral-only shifts as failure (exit 2)
+  -quiet                print only the one-line verdict summary
+```
+
+**Exit codes:** `0` stable · `1` shaken (behavioral) · `2` rupture (breaking) ·
+`3` usage/IO error. Wire it straight into a pipeline:
+
+```yaml
+- name: Contract safety gate
+  run: contractfault -old base.json -new head.json -consumers "consumers/*.json"
+  # job fails automatically on exit 2
