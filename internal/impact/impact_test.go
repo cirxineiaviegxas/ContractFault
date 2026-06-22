@@ -59,3 +59,7 @@ func TestMagnitudeScaleBounded(t *testing.T) {
 }
 
 func TestCriticalityAmplifiesScore(t *testing.T) {
+	ch := analyze.Change{Code: "endpoint.removed", Category: analyze.Breaking,
+		Severity: "critical", Endpoint: "e"}
+	high := Build(mkDiff(ch), []consumer.Manifest{
+		{Name: "h", Criticality: "high", Uses: []consumer.Usage{{Endpoint: "e"}}}})
