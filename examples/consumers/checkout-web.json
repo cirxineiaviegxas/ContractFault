@@ -8,3 +8,5 @@
       "writesFields": ["CreateOrderRequest.items", "CreateOrderRequest.couponCode"],
       "readsFields": ["Order.id", "Order.status", "Order.total"]
     },
+    {
+      "endpoint": "getOrder",
