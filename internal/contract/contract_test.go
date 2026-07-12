@@ -62,3 +62,11 @@ func TestParseRejectsUnknownFields(t *testing.T) {
 }
 
 func TestSortedTypeNamesDeterministic(t *testing.T) {
+	c := &Contract{Types: map[string]Type{"b": {}, "a": {}, "c": {}}}
+	got := c.SortedTypeNames()
+	want := []string{"a", "b", "c"}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("sorted names = %v, want %v", got, want)
+		}
+	}
