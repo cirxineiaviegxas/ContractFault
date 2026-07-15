@@ -80,3 +80,9 @@
     {
       "id": "cancelOrder",
       "method": "POST",
+      "path": "/orders/{id}/cancel",
+      "idempotent": true,
+      "params": [
+        { "name": "id", "in": "path", "type": "string", "required": true }
+      ],
+      "responses": { "200": "Order", "404": "Error", "409": "Error" }
