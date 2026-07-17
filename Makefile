@@ -54,3 +54,7 @@ fmt:
 
 vet:
 	$(GO) vet ./...
+
+tidy:
+	$(GO) mod tidy
+
