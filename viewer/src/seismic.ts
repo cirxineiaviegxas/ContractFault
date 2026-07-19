@@ -191,3 +191,20 @@ export function renderSvg(report: Report): string {
   <rect width="${width}" height="${height}" fill="#0d1117" />
   <text x="${marginX - 40}" y="48" font-size="22" font-family="monospace" fill="#c9d1d9">${escapeXml(report.service)} ${escapeXml(report.fromVersion)} → ${escapeXml(report.toVersion)}</text>
   <text x="${marginX - 40}" y="78" font-size="16" font-family="monospace" fill="${verdictColor}">magnitude ${report.summary.magnitude.toFixed(1)} · ${report.summary.verdict.toUpperCase()}</text>
+  <line x1="${marginX - 40}" y1="${faultY}" x2="${width - marginX + 40}" y2="${faultY}" stroke="#30363d" stroke-width="1" stroke-dasharray="6 5" />
+  <polyline points="${tracePoints.join(" ")}" fill="none" stroke="${verdictColor}" stroke-width="2" stroke-opacity="0.9">
+    <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+  </polyline>
+  ${stationSvg}
+  <text x="${marginX - 40}" y="${height - 20}" font-size="11" font-family="monospace" fill="#8b949e">breaking ${report.summary.breaking} · additive ${report.summary.additive} · behavioral ${report.summary.behavioral} · affected ${report.summary.affectedConsumers}</text>
+</svg>
+`;
+}
+
+function escapeXml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
