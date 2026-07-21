@@ -37,3 +37,7 @@
     <animate attributeName="stroke-opacity" values="0.2;1;0.2" dur="2.4s" repeatCount="indefinite" />
     <animateTransform attributeName="transform" type="translate"
                       values="-30 0; 30 0; -30 0" dur="6s" repeatCount="indefinite" />
+  </polyline>
+
+  <circle cx="330" cy="150" r="6" fill="#e5484d">
+    <animate attributeName="r" values="6;22;6" dur="2.2s" repeatCount="indefinite" />
