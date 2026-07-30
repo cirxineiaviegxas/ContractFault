@@ -86,3 +86,9 @@
         { "name": "id", "in": "path", "type": "string", "required": true }
       ],
       "responses": { "200": "Order", "404": "Error", "409": "Error" }
+    },
+    {
+      "id": "getReceipt",
+      "method": "GET",
+      "path": "/orders/{id}/receipt",
+      "idempotent": true,
