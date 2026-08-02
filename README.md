@@ -334,3 +334,27 @@ contractfault -old <before.json> -new <after.json> [flags]
 - name: Contract safety gate
   run: contractfault -old base.json -new head.json -consumers "consumers/*.json"
   # job fails automatically on exit 2
+```
+
+---
+
+## Building, testing, hacking
+
+```bash
+make build        # compile Go CLI + build TS viewer
+make test         # go test ./...  +  viewer npm test
+make report       # regenerate examples/report.json
+make demo         # analyze + render terminal map + SVG
+make svg          # regenerate docs/assets/impact-seismograph.svg
+make vet          # go vet ./...
+make ci           # exactly what CI runs
+```
+
+The test suites cover the fault mechanics directly: classification rules
+(required-vs-optional, enum removal, idempotency, method flips), the
+consumer-join attribution rules, magnitude monotonicity and bounding,
+deterministic JSON output, exit-code mapping, and an end-to-end run against the
+shipped examples. The TypeScript side tests schema validation, the magnitude
+bar, colored/uncolored terminal rendering, XML-escaped SVG generation, and CLI
+argument parsing.
+
