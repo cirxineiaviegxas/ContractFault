@@ -8,3 +8,4 @@
       "readsFields": ["Order.id", "Order.note", "Order.total", "Money.display"]
     }
   ]
+}
