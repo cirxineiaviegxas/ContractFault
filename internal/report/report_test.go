@@ -53,3 +53,8 @@ func TestJSONIsValidAndDeterministic(t *testing.T) {
 	}
 	if back.Service != "svc" {
 		t.Fatalf("round-trip lost service: %q", back.Service)
+	}
+}
+
+func TestTextContainsSeismograph(t *testing.T) {
+	r := &impact.Report{Service: "svc", FromVersion: "1", ToVersion: "2",
