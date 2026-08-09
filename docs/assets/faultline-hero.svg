@@ -41,3 +41,6 @@
 
   <circle cx="330" cy="150" r="6" fill="#e5484d">
     <animate attributeName="r" values="6;22;6" dur="2.2s" repeatCount="indefinite" />
+    <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2.2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="585" cy="150" r="5" fill="#f5a623">
