@@ -215,3 +215,23 @@ the seismic magnitude.
 Each impacted (change, consumer) pair contributes `severityWeight ×
 criticalityWeight` to a raw score. The raw score is compressed onto a 0–10
 Richter-like scale via `10 · (1 − 1/(1 + raw/12))`, so a handful of critical
+breaks dominate without a long tail of `info` changes saturating the meter.
+
+| Verdict   | Condition                                    |
+|-----------|----------------------------------------------|
+| `stable`  | no breaking and no behavioral changes        |
+| `tremor`  | minor behavioral drift only                  |
+| `shaken`  | magnitude ≥ 3.0 or ≥ 1 breaking change       |
+| `rupture` | magnitude ≥ 6.0 or ≥ 3 breaking changes      |
+
+## 5. Exit codes
+
+| Code | Meaning                                             |
+|------|-----------------------------------------------------|
+| `0`  | stable — safe to ship.                              |
+| `1`  | shaken — behavioral changes present.                |
+| `2`  | rupture — breaking changes present.                 |
+| `3`  | usage / IO error (bad flags, unreadable input).     |
+
+`-fail-on-behavioral` promotes behavioral-only shifts from `1` to `2` for
+stricter pipelines.
