@@ -52,3 +52,9 @@ func TestRunEndToEnd(t *testing.T) {
 		t.Fatalf("expected rupture exit 2, got %d", code)
 	}
 	data, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(data) == 0 {
+		t.Fatal("no report written")
+	}
