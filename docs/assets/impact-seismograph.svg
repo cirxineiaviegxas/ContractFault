@@ -30,3 +30,5 @@
       <text x="460.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">8.3</text>
     </g>
     <g>
+      <circle cx="660.0" cy="210" r="9.2" fill="#e5484d" fill-opacity="0.85">
+        <animate attributeName="r" values="9.2;13.2;9.2" dur="2.38s" repeatCount="indefinite" />
