@@ -225,3 +225,16 @@ func consumerAffected(ch analyze.Change, m consumer.Manifest) bool {
 // magnitudeScale compresses the raw additive score into a 0-10 Richter-like
 // scale using a diminishing-returns curve so a handful of critical breaks
 // dominate without a long tail of info changes saturating the meter.
+func magnitudeScale(raw float64) float64 {
+	if raw <= 0 {
+		return 0
+	}
+	// Logarithmic-style compression: 10 * (1 - 1/(1 + raw/12)).
+	m := 10.0 * (1.0 - 1.0/(1.0+raw/12.0))
+	return round1(m)
+}
+
+// verdict renders a plain-language seismic verdict from the summary.
+func verdict(s Summary) string {
+	switch {
+	case s.Breaking == 0 && s.Behavioral == 0:
