@@ -64,3 +64,8 @@ export function parseReport(value: unknown): Report {
     throw new Error("report: expected a JSON object");
   }
   const r = value as Record<string, unknown>;
+  if (r.schema !== SCHEMA_ID) {
+    throw new Error(`report: unsupported schema ${String(r.schema)} (want ${SCHEMA_ID})`);
+  }
+  if (typeof r.service !== "string") {
+    throw new Error("report: missing service");
