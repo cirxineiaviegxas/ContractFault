@@ -358,3 +358,27 @@ shipped examples. The TypeScript side tests schema validation, the magnitude
 bar, colored/uncolored terminal rendering, XML-escaped SVG generation, and CLI
 argument parsing.
 
+Determinism is a first-class property: every collection is sorted before
+emission, so two runs over the same inputs produce byte-identical JSON. This is
+verified in tests and matters for CI — a report you can diff is a report you can
+trust.
+
+---
+
+## Design decisions worth knowing
+
+- **Stdlib only on the Go side.** No third-party dependencies. The parser,
+  classifier, joiner and renderers are all built on `encoding/json`, `sort`,
+  `flag` and friends. Fewer moving parts, nothing to audit, trivial to vendor.
+- **`id`-based endpoint correlation.** Paths and methods are attributes, not
+  identity. This is what lets the tool say "method changed" instead of the
+  useless "one endpoint removed, one added."
+- **Criticality is a multiplier, not a filter.** A low-criticality consumer
+  feeling a critical break still shows up — it just contributes less magnitude.
+  You never lose information, you only reprioritize.
+- **Two exit-code producers, one schema.** Both the Go CLI and the TS viewer
+  derive the same CI verdict from the report, so you can gate on whichever half
+  is convenient in a given pipeline.
+- **Seismic vocabulary throughout.** `tremor`, `magnitude`, `blast radius`,
+  `rupture` — consistent metaphor, consistent code. The verdict word alone tells
+  a reviewer whether to keep reading.
