@@ -9,3 +9,4 @@ viewer/dist/
 
 # Editor noise
 .DS_Store
+*.swp
