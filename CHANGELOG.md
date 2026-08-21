@@ -27,3 +27,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Hand-authored animated hero SVG and a generated impact seismograph SVG under
   `docs/assets/`.
 - Test suites for every Go package and the TypeScript viewer.
+- `Makefile`, GitHub Actions CI, MIT license.
+
+[1.0.0]: https://example.com/seismic-labs/contractfault/releases/tag/v1.0.0
