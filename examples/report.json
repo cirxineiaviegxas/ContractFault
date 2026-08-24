@@ -222,3 +222,26 @@
       "team": "logistics",
       "criticality": "high",
       "breaking": 1,
+      "additive": 1,
+      "behavioral": 0,
+      "codes": [
+        "param.added",
+        "param.required.added"
+      ],
+      "score": 8.3
+    },
+    {
+      "name": "receipts-mailer",
+      "team": "notifications",
+      "criticality": "low",
+      "breaking": 1,
+      "additive": 1,
+      "behavioral": 0,
+      "codes": [
+        "endpoint.removed",
+        "field.added"
+      ],
+      "score": 4.3
+    }
+  ]
+}
