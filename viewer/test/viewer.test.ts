@@ -130,3 +130,15 @@ test("exitCodeFor maps summary to CI codes", () => {
 
 test("parseArgs parses input, svg and no-color", () => {
   const a = parseArgs(["report.json", "--svg", "out.svg", "--no-color"]);
+  assert.equal(a.input, "report.json");
+  assert.equal(a.svgOut, "out.svg");
+  assert.equal(a.color, false);
+});
+
+test("parseArgs requires an input file", () => {
+  assert.throws(() => parseArgs([]), /usage:/);
+});
+
+test("parseArgs rejects unknown flags", () => {
+  assert.throws(() => parseArgs(["r.json", "--bogus"]), /unknown argument/);
+});
