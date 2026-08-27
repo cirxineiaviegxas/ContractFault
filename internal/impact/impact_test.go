@@ -63,3 +63,8 @@ func TestCriticalityAmplifiesScore(t *testing.T) {
 		Severity: "critical", Endpoint: "e"}
 	high := Build(mkDiff(ch), []consumer.Manifest{
 		{Name: "h", Criticality: "high", Uses: []consumer.Usage{{Endpoint: "e"}}}})
+	low := Build(mkDiff(ch), []consumer.Manifest{
+		{Name: "l", Criticality: "low", Uses: []consumer.Usage{{Endpoint: "e"}}}})
+	if high.Consumers[0].Score <= low.Consumers[0].Score {
+		t.Fatalf("high criticality should score higher: %v vs %v",
+			high.Consumers[0].Score, low.Consumers[0].Score)
