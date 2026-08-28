@@ -65,3 +65,9 @@ function main(argv: string[]): number {
     return 3;
   }
 
+  if (args.svgOut) {
+    writeFileSync(args.svgOut, renderSvg(report), "utf8");
+    process.stderr.write(`wrote seismograph to ${args.svgOut}\n`);
+  }
+  process.stdout.write(renderTerminal(report, { color: args.color }));
+  return exitCodeFor(report);
