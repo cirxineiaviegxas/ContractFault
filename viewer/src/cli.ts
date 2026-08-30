@@ -71,3 +71,10 @@ function main(argv: string[]): number {
   }
   process.stdout.write(renderTerminal(report, { color: args.color }));
   return exitCodeFor(report);
+}
+
+// Only run when invoked directly, not when imported by tests.
+const invokedPath = process.argv[1] ?? "";
+if (invokedPath.endsWith("cli.ts") || invokedPath.endsWith("cli.js")) {
+  process.exit(main(process.argv.slice(2)));
+}
