@@ -44,3 +44,7 @@ func TestFieldPathsUnion(t *testing.T) {
 
 func TestUsesEndpoint(t *testing.T) {
 	m := Manifest{Uses: []Usage{{Endpoint: "getOrder"}}}
+	if !m.UsesEndpoint("getOrder") || m.UsesEndpoint("nope") {
+		t.Fatal("UsesEndpoint incorrect")
+	}
+}
