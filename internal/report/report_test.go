@@ -58,3 +58,9 @@ func TestJSONIsValidAndDeterministic(t *testing.T) {
 
 func TestTextContainsSeismograph(t *testing.T) {
 	r := &impact.Report{Service: "svc", FromVersion: "1", ToVersion: "2",
+		Summary: impact.Summary{Magnitude: 5.0, Verdict: "shaken"}}
+	out := Text(r)
+	if !strings.Contains(out, "[") || !strings.Contains(out, "magnitude 5.0") {
+		t.Fatalf("text missing seismograph or magnitude:\n%s", out)
+	}
+}
