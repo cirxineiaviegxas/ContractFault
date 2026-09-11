@@ -238,3 +238,16 @@ func magnitudeScale(raw float64) float64 {
 func verdict(s Summary) string {
 	switch {
 	case s.Breaking == 0 && s.Behavioral == 0:
+		return "stable"
+	case s.Magnitude >= 6.0 || s.Breaking >= 3:
+		return "rupture"
+	case s.Magnitude >= 3.0 || s.Breaking >= 1:
+		return "shaken"
+	default:
+		return "tremor"
+	}
+}
+
+func round1(f float64) float64 {
+	return float64(int(f*10+0.5)) / 10
+}
