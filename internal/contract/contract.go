@@ -193,3 +193,21 @@ func Parse(raw []byte, origin string) (*Contract, error) {
 	c.normalize()
 	if err := c.Validate(); err != nil {
 		return nil, err
+	}
+	return &c, nil
+}
+
+// normalize mirrors map keys onto struct fields and upper-cases methods so the
+// rest of the pipeline can rely on canonical values.
+func (c *Contract) normalize() {
+	if c.Types == nil {
+		c.Types = map[string]Type{}
+	}
+	for name, t := range c.Types {
+		t.Name = name
+		c.Types[name] = t
+	}
+	for i := range c.Endpoints {
+		c.Endpoints[i].Method = strings.ToUpper(c.Endpoints[i].Method)
+	}
+}
