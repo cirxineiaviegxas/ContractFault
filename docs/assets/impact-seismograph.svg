@@ -34,3 +34,5 @@
         <animate attributeName="r" values="9.2;13.2;9.2" dur="2.38s" repeatCount="indefinite" />
       </circle>
       <text x="660.0" y="244" text-anchor="middle" font-size="12" fill="#c9d1d9">receipts-mailer</text>
+      <text x="660.0" y="260" text-anchor="middle" font-size="10" fill="#8b949e">4.3</text>
+    </g>
