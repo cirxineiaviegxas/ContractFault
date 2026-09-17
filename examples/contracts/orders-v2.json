@@ -86,3 +86,11 @@
       "id": "cancelOrder",
       "method": "DELETE",
       "path": "/orders/{id}",
+      "idempotent": false,
+      "params": [
+        { "name": "id", "in": "path", "type": "string", "required": true }
+      ],
+      "responses": { "200": "Order", "404": "Error", "409": "Error" }
+    }
+  ]
+}
