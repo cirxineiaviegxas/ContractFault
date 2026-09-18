@@ -68,3 +68,8 @@ func TestCriticalityAmplifiesScore(t *testing.T) {
 	if high.Consumers[0].Score <= low.Consumers[0].Score {
 		t.Fatalf("high criticality should score higher: %v vs %v",
 			high.Consumers[0].Score, low.Consumers[0].Score)
+	}
+}
+
+func TestVerdictStableWhenNoBreaking(t *testing.T) {
+	d := mkDiff(analyze.Change{Code: "field.added", Category: analyze.Additive, Severity: "info"})
