@@ -382,3 +382,28 @@ trust.
 - **Seismic vocabulary throughout.** `tremor`, `magnitude`, `blast radius`,
   `rupture` — consistent metaphor, consistent code. The verdict word alone tells
   a reviewer whether to keep reading.
+
+---
+
+## FAQ
+
+**Is this OpenAPI-compatible?** No, and deliberately so. OpenAPI is enormous;
+contractfault ingests a small, purpose-built subset that captures exactly the
+properties that drive consumer impact (required-ness, nullability, arity, enum
+membership, idempotency). You can generate the format from OpenAPI upstream.
+
+**Why not just semver?** Semver tells you *that* something broke. contractfault
+tells you *what* broke, *who* it breaks, and *how to fix it* — and it computes
+the semver bump for you from the change categories.
+
+**Can a change be additive to one consumer and breaking to another?** The change
+*category* is a property of the contract, but the *magnitude* felt is per-town.
+A breaking change that touches no consumer contributes zero energy — the fault
+moved, but nobody lived on it.
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE). Built as a seismic fault laboratory for API
+evolution. Change the ground carefully; someone lives downhill.
