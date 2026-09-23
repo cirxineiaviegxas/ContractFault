@@ -58,3 +58,10 @@ func TestRunEndToEnd(t *testing.T) {
 	if len(data) == 0 {
 		t.Fatal("no report written")
 	}
+}
+
+func TestRunMissingFlags(t *testing.T) {
+	if code := run([]string{"-old", "x.json"}, os.Stdout, os.Stderr); code != usageExit {
+		t.Fatalf("missing -new should exit %d, got %d", usageExit, code)
+	}
+}
