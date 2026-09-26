@@ -70,3 +70,11 @@ func TestSortedTypeNamesDeterministic(t *testing.T) {
 			t.Fatalf("sorted names = %v, want %v", got, want)
 		}
 	}
+}
+
+func TestParamKey(t *testing.T) {
+	p := Param{Name: "status", In: "query"}
+	if p.Key() != "query:status" {
+		t.Fatalf("key = %q", p.Key())
+	}
+}
