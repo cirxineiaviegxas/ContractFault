@@ -185,3 +185,14 @@ func resolveConsumerPaths(spec string) ([]string, error) {
 			}
 			return nil, fmt.Errorf("consumer glob %q matched no files", part)
 		}
+		for _, m := range matches {
+			set[m] = true
+		}
+	}
+	out := make([]string, 0, len(set))
+	for p := range set {
+		out = append(out, p)
+	}
+	sort.Strings(out)
+	return out, nil
+}
