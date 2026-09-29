@@ -46,3 +46,6 @@ jobs:
       - name: Install
         run: npm install --no-audit --no-fund
       - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
