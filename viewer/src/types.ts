@@ -69,3 +69,9 @@ export function parseReport(value: unknown): Report {
   }
   if (typeof r.service !== "string") {
     throw new Error("report: missing service");
+  }
+  if (typeof r.summary !== "object" || r.summary === null) {
+    throw new Error("report: missing summary");
+  }
+  if (!Array.isArray(r.changes)) {
+    throw new Error("report: changes must be an array");
