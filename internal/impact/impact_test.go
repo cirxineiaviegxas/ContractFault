@@ -73,3 +73,8 @@ func TestCriticalityAmplifiesScore(t *testing.T) {
 
 func TestVerdictStableWhenNoBreaking(t *testing.T) {
 	d := mkDiff(analyze.Change{Code: "field.added", Category: analyze.Additive, Severity: "info"})
+	r := Build(d, nil)
+	if r.Summary.Verdict != "stable" {
+		t.Fatalf("verdict = %q, want stable", r.Summary.Verdict)
+	}
+}
