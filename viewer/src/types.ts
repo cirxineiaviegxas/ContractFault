@@ -75,3 +75,9 @@ export function parseReport(value: unknown): Report {
   }
   if (!Array.isArray(r.changes)) {
     throw new Error("report: changes must be an array");
+  }
+  if (!Array.isArray(r.consumers)) {
+    throw new Error("report: consumers must be an array");
+  }
+  return value as Report;
+}
