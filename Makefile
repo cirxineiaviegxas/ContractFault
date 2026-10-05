@@ -58,3 +58,8 @@ vet:
 tidy:
 	$(GO) mod tidy
 
+## ci: the exact sequence run in continuous integration.
+ci: vet test
+
+clean:
+	rm -rf bin $(VIEWER)/dist $(VIEWER)/node_modules
