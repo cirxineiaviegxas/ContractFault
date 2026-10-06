@@ -48,3 +48,7 @@
     <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2.8s" repeatCount="indefinite" />
   </circle>
 
+  <text x="40" y="60" font-family="monospace" font-size="34" fill="#c9d1d9" font-weight="bold">contractfault</text>
+  <text x="42" y="88" font-family="monospace" font-size="15" fill="#8b949e">API contract consumer-impact analyzer, a seismic fault laboratory</text>
+  <text x="40" y="270" font-family="monospace" font-size="13" fill="#58a6ff">breaking, additive, behavioral, mapped to every consumer along the fault</text>
+</svg>
