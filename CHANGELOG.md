@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Tests
+
+- Pin the empty-diff and no-consumer paths of the impact builder (#5).
+
 All notable changes to contractfault are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
