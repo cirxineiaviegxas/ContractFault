@@ -15,7 +15,7 @@ CONSUMERS ?= $(EXAMPLES)/consumers/*.json
 REPORT    ?= $(EXAMPLES)/report.json
 
 .PHONY: all build build-go build-viewer test test-go test-viewer \
-        report demo svg fmt vet clean tidy ci
+        report report-check demo svg fmt vet clean tidy ci
 
 all: build test
 
@@ -63,3 +63,9 @@ ci: vet test
 
 clean:
 	rm -rf bin $(VIEWER)/dist $(VIEWER)/node_modules
+
+## report-check: fail when the committed sample drifts from the analyzer output.
+report-check: build-go
+	$(BIN) -old $(OLD) -new $(NEW) -consumers "$(CONSUMERS)" -format json -out $(REPORT).check
+	diff -u $(REPORT) $(REPORT).check
+	rm -f $(REPORT).check
