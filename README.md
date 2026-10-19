@@ -407,3 +407,14 @@ moved, but nobody lived on it.
 
 MIT — see [LICENSE](LICENSE). Built as a seismic fault laboratory for API
 evolution. Change the ground carefully; someone lives downhill.
+
+## Exit codes
+
+| code | meaning |
+|---|---|
+| 0 | the pair is compatible - nothing reaches a consumer |
+| 1 | usage error, unreadable input, or a failed write |
+| 2 | rupture - a breaking change reaches a consumer (the gate signal) |
+
+CI asserts 2 for the sample pair on purpose; `cmd/contractfault/main_test.go` pins the
+split so a new failure mode cannot quietly reuse 2.
